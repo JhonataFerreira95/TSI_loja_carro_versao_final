@@ -14,6 +14,7 @@ import org.springframework.mock.web.MockHttpSession;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.hamcrest.Matchers.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -79,6 +80,16 @@ class CarroUsuarioLogIntegracaoTest {
                         .content("{\"modelo\":\"Uno\",\"ano\":2021,\"preco\":40000}"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.cadastradoPor.email").value("maria@email.com"));
+    }
+
+    @Test
+    void rejeitaImagemComUrlApontandoParaEnderecoLocal() throws Exception {
+        mockMvc.perform(post("/carro/salvar").session(sessao).contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"modelo\":\"Gol\",\"ano\":2020,\"preco\":50000,"
+                                + "\"imagemUrl\":\"http://127.0.0.1/imagem.png\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.erro").value(containsString("endereço local ou privado")));
+        assertThat(carroRepository.findAll()).isEmpty();
     }
 
     @Test

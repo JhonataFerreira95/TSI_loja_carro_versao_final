@@ -24,9 +24,13 @@ public class CarroService {
     @Autowired
     private SessaoService sessaoService;
 
+    @Autowired
+    private ImagemCarroService imagemCarroService;
+
     public Carro save(Carro c) {
         validarModelo(c.getModelo());  // Valida o modelo antes de salvar
         validarPreco(c.getPreco());
+        salvarImagemSeInformada(c);
         c.setCadastradoPor(sessaoService.usuarioLogado().orElse(null));
         Carro salvo = carroRepository.save(c);
         logService.registrar("CRIAR", ENTIDADE, "Carro criado: ID " + salvo.getId() + ", modelo " + salvo.getModelo());
@@ -93,10 +97,18 @@ public class CarroService {
                 .orElseThrow(() -> new CarroException("Carro com ID " + c.getId() + " não encontrado para atualização."));
         validarModelo(c.getModelo());  // Valida o modelo antes de atualizar
         validarPreco(c.getPreco());
+        c.setImagem(existente.getImagem());
+        salvarImagemSeInformada(c);
         c.setCadastradoPor(existente.getCadastradoPor());  // Mantém quem cadastrou o carro
         Carro atualizado = carroRepository.save(c);  // Retorna o carro salvo para feedback
         logService.registrar("ATUALIZAR", ENTIDADE, "Carro atualizado: ID " + atualizado.getId() + ", modelo " + atualizado.getModelo());
         return atualizado;
+    }
+
+    private void salvarImagemSeInformada(Carro carro) {
+        if (carro.getImagemUrl() != null && !carro.getImagemUrl().isBlank()) {
+            carro.setImagem(imagemCarroService.salvarDaUrl(carro.getImagemUrl()));
+        }
     }
 
     // Validação do modelo

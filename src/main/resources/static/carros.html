@@ -23,6 +23,9 @@
         <label for="preco">Preço:</label>
         <input type="number" id="preco" step="0.01" min="0" required>
 
+        <label for="imagemUrl">URL da imagem (opcional):</label>
+        <input type="url" id="imagemUrl" maxlength="2048" placeholder="https://exemplo.com/carro.jpg">
+
         <br>
         <button type="submit" id="btnSalvar">Cadastrar</button>
         <button type="button" onclick="limparFormulario()">Cancelar</button>
@@ -39,6 +42,7 @@
                 <th>Ano</th>
                 <th>Preço</th>
                 <th>Cadastrado por</th>
+                <th>Imagem</th>
                 <th>Ações</th>
             </tr>
         </thead>
@@ -55,7 +59,15 @@
             carros.forEach(function (c) {
                 const cadastradoPor = c.cadastradoPor ? c.cadastradoPor.nome : "";
                 const preco = c.preco.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
-                const linha = adicionarLinha(tabela, [c.id, c.modelo, c.ano, preco, cadastradoPor]);
+                const linha = adicionarLinha(tabela, [c.id, c.modelo, c.ano, preco, cadastradoPor, ""]);
+                if (c.imagem) {
+                    const imagem = document.createElement("img");
+                    imagem.src = c.imagem;
+                    imagem.alt = "Imagem do carro " + c.modelo;
+                    imagem.width = 120;
+                    imagem.loading = "lazy";
+                    linha.children[5].appendChild(imagem);
+                }
                 adicionarAcoes(linha,
                     function () { editarCarro(c); },
                     function () { excluirCarro(c.id); });
@@ -68,7 +80,8 @@
             const carro = {
                 modelo: document.getElementById("modelo").value,
                 ano: Number(document.getElementById("ano").value),
-                preco: Number(document.getElementById("preco").value)
+                preco: Number(document.getElementById("preco").value),
+                imagemUrl: document.getElementById("imagemUrl").value.trim()
             };
 
             const resposta = id

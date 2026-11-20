@@ -1,5 +1,6 @@
 package br.org.edu.ifrn.LojaCarro.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +12,11 @@ public class Carro {
     String modelo;
     int ano;
     double preco;
+    private String imagem;
+
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String imagemUrl;
 
     // Usuário que cadastrou o carro
     @ManyToOne
@@ -63,6 +69,23 @@ public class Carro {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    public String getImagem() {
+        return imagem;
+    }
+
+    public void setImagem(String imagem) {
+        this.imagem = imagem;
+    }
+
+    public String getImagemUrl() {
+        return imagemUrl;
+    }
+
+    public void setImagemUrl(String imagemUrl) {
+        this.imagemUrl = imagemUrl;
     }
 
     public Usuario getCadastradoPor() {
