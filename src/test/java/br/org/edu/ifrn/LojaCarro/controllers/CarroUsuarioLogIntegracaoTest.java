@@ -119,6 +119,15 @@ class CarroUsuarioLogIntegracaoTest {
             assertThat(carroRepository.findAll()).singleElement()
                     .extracting(carro -> carro.getImagem())
                     .isEqualTo(caminhoImagem);
+            mockMvc.perform(multipart("/carro/" + objectMapper.readTree(corpo).get("id").asLong())
+                            .session(sessao).param("modelo", "Gol").param("ano", "2021")
+                            .param("preco", "51000")
+                            .with(request -> {
+                                request.setMethod("PUT");
+                                return request;
+                            }))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$.imagem").value(caminhoImagem));
         } finally {
             Files.deleteIfExists(arquivoSalvo);
         }
