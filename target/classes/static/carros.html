@@ -53,6 +53,8 @@
     </table>
 
     <script>
+        let idAdministradorAtual = "";
+
         async function listarCarros() {
             const resposta = await api("/carro/listarCarros");
             const carros = await resposta.json();
@@ -151,6 +153,7 @@
         function limparFormulario() {
             document.getElementById("formCarro").reset();
             document.getElementById("id").value = "";
+            document.getElementById("usuarioId").value = idAdministradorAtual;
             document.getElementById("btnSalvar").textContent = "Cadastrar";
         }
 
@@ -164,6 +167,7 @@
             const contas = await resposta.json();
             const seletor = document.getElementById("usuarioId");
             seletor.innerHTML = "";
+            idAdministradorAtual = usuarioLogado.id;
             contas.forEach(function (conta) {
                 const opcao = document.createElement("option");
                 opcao.value = conta.id;

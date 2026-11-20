@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="7.086" tests="8" errors="0" skipped="0" failures="1">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="5.81" tests="8" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -17,7 +17,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-25.0.3.9-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\Bass\AppData\Local\Temp\surefire17068416180924199945\surefirebooter-20261120183306137_3.jar C:\Users\Bass\AppData\Local\Temp\surefire17068416180924199945 2026-11-20T18-33-05_974-jvmRun1 surefire-20261120183306137_1tmp surefire_0-20261120183306137_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Bass\AppData\Local\Temp\surefire1847366530310276812\surefirebooter-20261120190035105_3.jar C:\Users\Bass\AppData\Local\Temp\surefire1847366530310276812 2026-11-20T19-00-34_969-jvmRun1 surefire-20261120190035105_1tmp surefire_0-20261120190035105_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Bass\Downloads\TSI_loja_carro_versao_final\target\test-classes;C:\Users\Bass\Downloads\TSI_loja_carro_versao_final\target\classes;C:\Users\Bass\.m2\repository\org\springframework\boot\spring-boot-starter-web\3.5.7\spring-boot-starter-web-3.5.7.jar;C:\Users\Bass\.m2\repository\org\springframework\boot\spring-boot-starter\3.5.7\spring-boot-starter-3.5.7.jar;C:\Users\Bass\.m2\repository\org\springframework\boot\spring-boot\3.5.7\spring-boot-3.5.7.jar;C:\Users\Bass\.m2\repository\org\springframework\boot\spring-boot-autoconfigure\3.5.7\spring-boot-autoconfigure-3.5.7.jar;C:\Users\Bass\.m2\repository\org\springframework\boot\spring-boot-starter-logging\3.5.7\spring-boot-starter-logging-3.5.7.jar;C:\Users\Bass\.m2\repository\ch\qos\logback\logback-classic\1.5.20\logback-classic-1.5.20.jar;C:\Users\Bass\.m2\repository\ch\qos\logback\logback-core\1.5.20\logback-core-1.5.20.jar;C:\Users\Bass\.m2\repository\org\apache\logging\log4j\log4j-to-slf4j\2.24.3\log4j-to-slf4j-2.24.3.jar;C:\Users\Bass\.m2\repository\org\apache\logging\log4j\log4j-api\2.24.3\log4j-api-2.24.3.jar;C:\Users\Bass\.m2\repository\org\slf4j\jul-to-slf4j\2.0.17\jul-to-slf4j-2.0.17.jar;C:\Users\Bass\.m2\repository\jakarta\annotation\jakarta.annotation-api\2.1.1\jakarta.annotation-api-2.1.1.jar;C:\Users\Bass\.m2\repository\org\yaml\snakeyaml\2.4\snakeyaml-2.4.jar;C:\Users\Bass\.m2\repository\org\springframework\boot\spring-boot-starter-json\3.5.7\spring-boot-starter-json-3.5.7.jar;C:\Users\Bass\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.19.2\jackson-databind-2.19.2.jar;C:\Users\Bass\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.19.2\jackson-annotations-2.19.2.jar;C:\Users\Bass\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.19.2\jackson-core-2.19.2.jar;C:\Users\Bass\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jdk8\2.19.2\jackson-datatype-jdk8-2.19.2.jar;C:\Users\Bass\.m2\repository\com\fasterxml\jackson\datatype\jackson-datatype-jsr310\2.19.2\jackson-datatype-jsr310-2.19.2.jar;C:\Users\Bass\.m2\repository\com\fasterxml\jackson\module\jackson-module-parameter-names\2.19.2\jackson-module-parameter-names-2.19.2.jar;C:\Users\Bass\.m2\repository\org\springframework\boot\spring-boot-starter-tomcat\3.5.7\spring-boot-starter-tomcat-3.5.7.jar;C:\Users\Bass\.m2\repository\org\apache\tomcat\embed\tomcat-embed-websocket\10.1.48\tomcat-embed-websocket-10.1.48.jar;C:\Users\Bass\.m2\repository\org\springframework\spring-web\6.2.12\spring-web-6.2.12.jar;C:\Users\Bass\.m2\repository\org\springframework\spring-beans\6.2.12\spring-beans-6.2.12.jar;C:\Users\Bass\.m2\repository\io\micrometer\micrometer-observation\1.15.5\micrometer-observation-1.15.5.jar;C:\Users\Bass\.m2\repository\io\micrometer\micrometer-commons\1.15.5\micrometer-commons-1.15.5.jar;C:\Users\Bass\.m2\repository\org\springframework\spring-webmvc\6.2.12\spring-webmvc-6.2.12.jar;C:\Users\Bass\.m2\repository\org\springframework\spring-aop\6.2.12\spring-aop-6.2.12.jar;C:\Users\Bass\.m2\repository\org\springframework\spring-context\6.2.12\spring-context-6.2.12.jar;C:\Users\Bass\.m2\repository\org\springframework\spring-expression\6.2.12\spring-expression-6.2.12.jar;C:\Users\Bass\.m2\repository\org\apache\tomcat\embed\tomcat-embed-jasper\10.1.48\tomcat-embed-jasper-10.1.48.jar;C:\Users\Bass\.m2\repository\org\apache\tomcat\embed\tomcat-embed-core\10.1.48\tomcat-embed-core-10.1.48.jar;C:\Users\Bass\.m2\repository\org\apache\tomcat\tomcat-annotations-api\10.1.48\tomcat-annotations-api-10.1.48.jar;C:\Users\Bass\.m2\repository\org\apache\tomcat\embed\tomcat-embed-el\10.1.48\tomcat-embed-el-10.1.48.jar;C:\Users\Bass\.m2\repository\org\eclipse\jdt\ecj\3.33.0\ecj-3.33.0.jar;C:\Users\Bass\.m2\repository\com\mysql\mysql-connector-j\9.7.0\mysql-connector-j-9.7.0.jar;C:\Users\Bass\.m2\repository\org\springframework\boot\spring-boot-starter-data-jpa\3.5.7\spring-boot-starter-data-jpa-3.5.7.jar;C:\Users\Bass\.m2\repository\org\springframework\boot\spring-boot-starter-jdbc\3.5.7\spring-boot-starter-jdbc-3.5.7.jar;C:\Users\Bass\.m2\repository\com\zaxxer\HikariCP\6.3.3\HikariCP-6.3.3.jar;C:\Users\Bass\.m2\repository\org\springframework\spring-jdbc\6.2.12\spring-jdbc-6.2.12.jar;C:\Users\Bass\.m2\repository\org\hibernate\orm\hibernate-core\6.6.33.Final\hibernate-core-6.6.33.Final.jar;C:\Users\Bass\.m2\repository\jakarta\persistence\jakarta.persistence-api\3.1.0\jakarta.persistence-api-3.1.0.jar;C:\Users\Bass\.m2\repository\jakarta\transaction\jakarta.transaction-api\2.0.1\jakarta.transaction-api-2.0.1.jar;C:\Users\Bass\.m2\repository\org\jboss\logging\jboss-logging\3.6.1.Final\jboss-logging-3.6.1.Final.jar;C:\Users\Bass\.m2\repository\org\hibernate\common\hibernate-commons-annotations\7.0.3.Final\hibernate-commons-annotations-7.0.3.Final.jar;C:\Users\Bass\.m2\repository\io\smallrye\jandex\3.2.0\jandex-3.2.0.jar;C:\Users\Bass\.m2\repository\com\fasterxml\classmate\1.7.1\classmate-1.7.1.jar;C:\Users\Bass\.m2\repository\net\bytebuddy\byte-buddy\1.17.8\byte-buddy-1.17.8.jar;C:\Users\Bass\.m2\repository\org\glassfish\jaxb\jaxb-runtime\4.0.6\jaxb-runtime-4.0.6.jar;C:\Users\Bass\.m2\repository\org\glassfish\jaxb\jaxb-core\4.0.6\jaxb-core-4.0.6.jar;C:\Users\Bass\.m2\repository\org\eclipse\angus\angus-activation\2.0.3\angus-activation-2.0.3.jar;C:\Users\Bass\.m2\repository\org\glassfish\jaxb\txw2\4.0.6\txw2-4.0.6.jar;C:\Users\Bass\.m2\repository\com\sun\istack\istack-commons-runtime\4.1.2\istack-commons-runtime-4.1.2.jar;C:\Users\Bass\.m2\repository\jakarta\inject\jakarta.inject-api\2.0.1\jakarta.inject-api-2.0.1.jar;C:\Users\Bass\.m2\repository\org\antlr\antlr4-runtime\4.13.0\antlr4-runtime-4.13.0.jar;C:\Users\Bass\.m2\repository\org\springframework\data\spring-data-jpa\3.5.5\spring-data-jpa-3.5.5.jar;C:\Users\Bass\.m2\repository\org\springframework\data\spring-data-commons\3.5.5\spring-data-commons-3.5.5.jar;C:\Users\Bass\.m2\repository\org\springframework\spring-orm\6.2.12\spring-orm-6.2.12.jar;C:\Users\Bass\.m2\repository\org\springframework\spring-tx\6.2.12\spring-tx-6.2.12.jar;C:\Users\Bass\.m2\repository\org\slf4j\slf4j-api\2.0.17\slf4j-api-2.0.17.jar;C:\Users\Bass\.m2\repository\org\springframework\spring-aspects\6.2.12\spring-aspects-6.2.12.jar;C:\Users\Bass\.m2\repository\org\aspectj\aspectjweaver\1.9.24\aspectjweaver-1.9.24.jar;C:\Users\Bass\.m2\repository\org\springframework\boot\spring-boot-starter-test\3.5.7\spring-boot-starter-test-3.5.7.jar;C:\Users\Bass\.m2\repository\org\springframework\boot\spring-boot-test\3.5.7\spring-boot-test-3.5.7.jar;C:\Users\Bass\.m2\repository\org\springframework\boot\spring-boot-test-autoconfigure\3.5.7\spring-boot-test-autoconfigure-3.5.7.jar;C:\Users\Bass\.m2\repository\com\jayway\jsonpath\json-path\2.9.0\json-path-2.9.0.jar;C:\Users\Bass\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.4\jakarta.xml.bind-api-4.0.4.jar;C:\Users\Bass\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.4\jakarta.activation-api-2.1.4.jar;C:\Users\Bass\.m2\repository\net\minidev\json-smart\2.5.2\json-smart-2.5.2.jar;C:\Users\Bass\.m2\repository\net\minidev\accessors-smart\2.5.2\accessors-smart-2.5.2.jar;C:\Users\Bass\.m2\repository\org\ow2\asm\asm\9.7.1\asm-9.7.1.jar;C:\Users\Bass\.m2\repository\org\assertj\assertj-core\3.27.6\assertj-core-3.27.6.jar;C:\Users\Bass\.m2\repository\org\awaitility\awaitility\4.2.2\awaitility-4.2.2.jar;C:\Users\Bass\.m2\repository\org\hamcrest\hamcrest\3.0\hamcrest-3.0.jar;C:\Users\Bass\.m2\repository\org\junit\jupiter\junit-jupiter\5.12.2\junit-jupiter-5.12.2.jar;C:\Users\Bass\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.12.2\junit-jupiter-api-5.12.2.jar;C:\Users\Bass\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Bass\.m2\repository\org\junit\platform\junit-platform-commons\1.12.2\junit-platform-commons-1.12.2.jar;C:\Users\Bass\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Bass\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.12.2\junit-jupiter-params-5.12.2.jar;C:\Users\Bass\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.12.2\junit-jupiter-engine-5.12.2.jar;C:\Users\Bass\.m2\repository\org\junit\platform\junit-platform-engine\1.12.2\junit-platform-engine-1.12.2.jar;C:\Users\Bass\.m2\repository\org\mockito\mockito-core\5.17.0\mockito-core-5.17.0.jar;C:\Users\Bass\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.8\byte-buddy-agent-1.17.8.jar;C:\Users\Bass\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\Bass\.m2\repository\org\mockito\mockito-junit-jupiter\5.17.0\mockito-junit-jupiter-5.17.0.jar;C:\Users\Bass\.m2\repository\org\skyscreamer\jsonassert\1.5.3\jsonassert-1.5.3.jar;C:\Users\Bass\.m2\repository\com\vaadin\external\google\android-json\0.0.20131108.vaadin1\android-json-0.0.20131108.vaadin1.jar;C:\Users\Bass\.m2\repository\org\springframework\spring-core\6.2.12\spring-core-6.2.12.jar;C:\Users\Bass\.m2\repository\org\springframework\spring-jcl\6.2.12\spring-jcl-6.2.12.jar;C:\Users\Bass\.m2\repository\org\springframework\spring-test\6.2.12\spring-test-6.2.12.jar;C:\Users\Bass\.m2\repository\org\xmlunit\xmlunit-core\2.10.4\xmlunit-core-2.10.4.jar;C:\Users\Bass\.m2\repository\com\h2database\h2\2.3.232\h2-2.3.232.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -34,7 +34,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="FILE_LOG_CHARSET" value="UTF-8"/>
     <property name="java.awt.headless" value="true"/>
-    <property name="surefire.real.class.path" value="C:\Users\Bass\AppData\Local\Temp\surefire17068416180924199945\surefirebooter-20261120183306137_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Bass\AppData\Local\Temp\surefire1847366530310276812\surefirebooter-20261120190035105_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25.0.3+9-LTS"/>
@@ -54,7 +54,7 @@
     <property name="user.dir" value="C:\Users\Bass\Downloads\TSI_loja_carro_versao_final"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="25124"/>
+    <property name="PID" value="28692"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
     <property name="native.encoding" value="Cp1252"/>
@@ -68,9 +68,9 @@
     <property name="java.class.version" value="69.0"/>
     <property name="LOGGED_APPLICATION_NAME" value="[LojaCarro] "/>
   </properties>
-  <testcase name="naoExcluiUsuarioComCarrosCadastrados" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.969">
-    <system-out><![CDATA[18:33:07.095 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest]: CarroUsuarioLogIntegracaoTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-18:33:07.268 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration br.org.edu.ifrn.LojaCarro.LojaCarroApplication for test class br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest
+  <testcase name="naoExcluiUsuarioComCarrosCadastrados" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.77">
+    <system-out><![CDATA[19:00:35.880 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest]: CarroUsuarioLogIntegracaoTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:00:36.018 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration br.org.edu.ifrn.LojaCarro.LojaCarroApplication for test class br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -81,18 +81,18 @@
 
  :: Spring Boot ::                (v3.5.7)
 
-2026-11-20T18:33:07.789-03:00  INFO 25124 --- [LojaCarro] [           main] .o.e.i.L.c.CarroUsuarioLogIntegracaoTest : Starting CarroUsuarioLogIntegracaoTest using Java 25.0.3 with PID 25124 (started by Bass in C:\Users\Bass\Downloads\TSI_loja_carro_versao_final)
-2026-11-20T18:33:07.791-03:00  INFO 25124 --- [LojaCarro] [           main] .o.e.i.L.c.CarroUsuarioLogIntegracaoTest : No active profile set, falling back to 1 default profile: "default"
-2026-11-20T18:33:08.619-03:00  INFO 25124 --- [LojaCarro] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-11-20T18:33:08.710-03:00  INFO 25124 --- [LojaCarro] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 74 ms. Found 3 JPA repository interfaces.
-2026-11-20T18:33:09.269-03:00  INFO 25124 --- [LojaCarro] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-11-20T18:33:09.358-03:00  INFO 25124 --- [LojaCarro] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.33.Final
-2026-11-20T18:33:09.406-03:00  INFO 25124 --- [LojaCarro] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-11-20T18:33:09.834-03:00  INFO 25124 --- [LojaCarro] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-11-20T18:33:09.876-03:00  INFO 25124 --- [LojaCarro] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-11-20T18:33:10.130-03:00  INFO 25124 --- [LojaCarro] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
-2026-11-20T18:33:10.132-03:00  INFO 25124 --- [LojaCarro] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-11-20T18:33:10.204-03:00  INFO 25124 --- [LojaCarro] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+2026-11-20T19:00:36.422-03:00  INFO 28692 --- [LojaCarro] [           main] .o.e.i.L.c.CarroUsuarioLogIntegracaoTest : Starting CarroUsuarioLogIntegracaoTest using Java 25.0.3 with PID 28692 (started by Bass in C:\Users\Bass\Downloads\TSI_loja_carro_versao_final)
+2026-11-20T19:00:36.424-03:00  INFO 28692 --- [LojaCarro] [           main] .o.e.i.L.c.CarroUsuarioLogIntegracaoTest : No active profile set, falling back to 1 default profile: "default"
+2026-11-20T19:00:37.064-03:00  INFO 28692 --- [LojaCarro] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-11-20T19:00:37.129-03:00  INFO 28692 --- [LojaCarro] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 47 ms. Found 3 JPA repository interfaces.
+2026-11-20T19:00:37.613-03:00  INFO 28692 --- [LojaCarro] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-11-20T19:00:37.677-03:00  INFO 28692 --- [LojaCarro] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.33.Final
+2026-11-20T19:00:37.711-03:00  INFO 28692 --- [LojaCarro] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-11-20T19:00:38.051-03:00  INFO 28692 --- [LojaCarro] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-11-20T19:00:38.086-03:00  INFO 28692 --- [LojaCarro] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-11-20T19:00:38.273-03:00  INFO 28692 --- [LojaCarro] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
+2026-11-20T19:00:38.276-03:00  INFO 28692 --- [LojaCarro] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-11-20T19:00:38.333-03:00  INFO 28692 --- [LojaCarro] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
 	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
 	Database driver: undefined/unknown
 	Database version: 2.3.232
@@ -100,20 +100,20 @@
 	Isolation level: undefined/unknown
 	Minimum pool size: undefined/unknown
 	Maximum pool size: undefined/unknown
-2026-11-20T18:33:11.206-03:00  INFO 25124 --- [LojaCarro] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-11-20T18:33:11.264-03:00  INFO 25124 --- [LojaCarro] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-11-20T18:33:11.960-03:00  WARN 25124 --- [LojaCarro] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-11-20T18:33:11.994-03:00  INFO 25124 --- [LojaCarro] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
-2026-11-20T18:33:12.419-03:00  INFO 25124 --- [LojaCarro] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
-2026-11-20T18:33:12.419-03:00  INFO 25124 --- [LojaCarro] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
-2026-11-20T18:33:12.421-03:00  INFO 25124 --- [LojaCarro] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
-2026-11-20T18:33:12.447-03:00  INFO 25124 --- [LojaCarro] [           main] .o.e.i.L.c.CarroUsuarioLogIntegracaoTest : Started CarroUsuarioLogIntegracaoTest in 4.981 seconds (process running for 6.141)
-2026-11-20T18:33:13.225-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 1, e-mail maria@email.com - por anônimo
-2026-11-20T18:33:13.302-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
-2026-11-20T18:33:13.332-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Carro - Carro criado: ID 1, modelo Gol - por Maria (maria@email.com)
-2026-11-20T18:33:13.344-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 2, e-mail joao@email.com - por anônimo
-2026-11-20T18:33:13.352-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: joao@email.com - por Joao (joao@email.com)
-2026-11-20T18:33:13.372-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ERRO] Usuario - O usuário maria@email.com possui carros cadastrados e não pode ser excluído. - por Joao (joao@email.com)
+2026-11-20T19:00:39.099-03:00  INFO 28692 --- [LojaCarro] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-11-20T19:00:39.148-03:00  INFO 28692 --- [LojaCarro] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-11-20T19:00:39.706-03:00  WARN 28692 --- [LojaCarro] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-11-20T19:00:39.740-03:00  INFO 28692 --- [LojaCarro] [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page: class path resource [static/index.html]
+2026-11-20T19:00:40.181-03:00  INFO 28692 --- [LojaCarro] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-11-20T19:00:40.181-03:00  INFO 28692 --- [LojaCarro] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-11-20T19:00:40.183-03:00  INFO 28692 --- [LojaCarro] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 1 ms
+2026-11-20T19:00:40.207-03:00  INFO 28692 --- [LojaCarro] [           main] .o.e.i.L.c.CarroUsuarioLogIntegracaoTest : Started CarroUsuarioLogIntegracaoTest in 4.059 seconds (process running for 4.98)
+2026-11-20T19:00:40.830-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 1, e-mail maria@email.com - por anônimo
+2026-11-20T19:00:40.892-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
+2026-11-20T19:00:40.913-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Carro - Carro criado: ID 1, modelo Gol - por Maria (maria@email.com)
+2026-11-20T19:00:40.924-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 2, e-mail joao@email.com - por anônimo
+2026-11-20T19:00:40.932-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: joao@email.com - por Joao (joao@email.com)
+2026-11-20T19:00:40.946-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ERRO] Usuario - O usuário maria@email.com possui carros cadastrados e não pode ser excluído. - por Joao (joao@email.com)
 ]]></system-out>
     <system-err><![CDATA[Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
 WARNING: A Java agent has been loaded dynamically (C:\Users\Bass\.m2\repository\net\bytebuddy\byte-buddy-agent\1.17.8\byte-buddy-agent-1.17.8.jar)
@@ -122,439 +122,66 @@ WARNING: If a serviceability tool is not in use, please run with -Djdk.instrumen
 WARNING: Dynamic loading of agents will be disallowed by default in a future release
 ]]></system-err>
   </testcase>
-  <testcase name="rejeitaArquivoQueNaoEImagem" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.123">
-    <system-out><![CDATA[2026-11-20T18:33:13.467-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 3, e-mail maria@email.com - por anônimo
-2026-11-20T18:33:13.479-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
-2026-11-20T18:33:13.488-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ERRO] Carro - Envie uma imagem JPEG, PNG, GIF ou WebP válida. - por Maria (maria@email.com)
+  <testcase name="rejeitaArquivoQueNaoEImagem" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.104">
+    <system-out><![CDATA[2026-11-20T19:00:41.020-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 3, e-mail maria@email.com - por anônimo
+2026-11-20T19:00:41.029-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
+2026-11-20T19:00:41.037-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ERRO] Carro - Envie uma imagem JPEG, PNG, GIF ou WebP válida. - por Maria (maria@email.com)
 ]]></system-out>
   </testcase>
-  <testcase name="usuarioComumNaoAcessaCarrosNemLogs" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.065">
-    <system-out><![CDATA[2026-11-20T18:33:13.581-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 4, e-mail maria@email.com - por anônimo
-2026-11-20T18:33:13.595-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
-2026-11-20T18:33:13.605-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 5, e-mail joao@email.com - por anônimo
-2026-11-20T18:33:13.611-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: joao@email.com - por Joao (joao@email.com)
-2026-11-20T18:33:13.617-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ACESSO_NEGADO] Sistema - Tentativa de acesso sem permissão: GET /carro/listarCarros - por Joao (joao@email.com)
-2026-11-20T18:33:13.622-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ACESSO_NEGADO] Sistema - Tentativa de acesso sem permissão: GET /log - por Joao (joao@email.com)
+  <testcase name="usuarioComumNaoAcessaCarrosNemLogs" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.048">
+    <system-out><![CDATA[2026-11-20T19:00:41.116-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 4, e-mail maria@email.com - por anônimo
+2026-11-20T19:00:41.125-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
+2026-11-20T19:00:41.131-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 5, e-mail joao@email.com - por anônimo
+2026-11-20T19:00:41.137-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: joao@email.com - por Joao (joao@email.com)
+2026-11-20T19:00:41.143-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ACESSO_NEGADO] Sistema - Tentativa de acesso sem permissão: GET /carro/listarCarros - por Joao (joao@email.com)
+2026-11-20T19:00:41.147-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ACESSO_NEGADO] Sistema - Tentativa de acesso sem permissão: GET /log - por Joao (joao@email.com)
 ]]></system-out>
   </testcase>
-  <testcase name="uploadSalvaArquivoLocalEArmazenaApenasOCaminhoNoCarro" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.069">
-    <system-out><![CDATA[2026-11-20T18:33:13.643-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 6, e-mail maria@email.com - por anônimo
-2026-11-20T18:33:13.652-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
-2026-11-20T18:33:13.664-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Carro - Carro criado: ID 2, modelo Gol - por Maria (maria@email.com)
-2026-11-20T18:33:13.689-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ATUALIZAR] Carro - Carro atualizado: ID 2, modelo Gol - por Maria (maria@email.com)
+  <testcase name="uploadSalvaArquivoLocalEArmazenaApenasOCaminhoNoCarro" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.065">
+    <system-out><![CDATA[2026-11-20T19:00:41.168-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 6, e-mail maria@email.com - por anônimo
+2026-11-20T19:00:41.177-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
+2026-11-20T19:00:41.187-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Carro - Carro criado: ID 2, modelo Gol - por Maria (maria@email.com)
+2026-11-20T19:00:41.212-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ATUALIZAR] Carro - Carro atualizado: ID 2, modelo Gol - por Maria (maria@email.com)
 ]]></system-out>
   </testcase>
-  <testcase name="logsRegistramQuemFezCadaAcao" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.052">
-    <system-out><![CDATA[2026-11-20T18:33:13.713-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 7, e-mail maria@email.com - por anônimo
-2026-11-20T18:33:13.721-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
-2026-11-20T18:33:13.727-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Carro - Carro criado: ID 3, modelo Gol - por Maria (maria@email.com)
-2026-11-20T18:33:13.734-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ERRO] Carro - O modelo do carro deve ter menos de 5 caracteres. Tamanho atual: 13 - por Maria (maria@email.com)
+  <testcase name="logsRegistramQuemFezCadaAcao" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.056">
+    <system-out><![CDATA[2026-11-20T19:00:41.237-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 7, e-mail maria@email.com - por anônimo
+2026-11-20T19:00:41.246-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
+2026-11-20T19:00:41.253-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Carro - Carro criado: ID 3, modelo Gol - por Maria (maria@email.com)
+2026-11-20T19:00:41.259-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ERRO] Carro - O modelo do carro deve ter menos de 5 caracteres. Tamanho atual: 13 - por Maria (maria@email.com)
 ]]></system-out>
   </testcase>
-  <testcase name="usuarioSoPodeEnviarELimparFotosDosPropriosCarrosEAdminPodeDeTodos" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.136">
-    <failure message="Status expected:&lt;403&gt; but was:&lt;405&gt;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: Status expected:<403> but was:<405>
-	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:61)
-	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:128)
-	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:640)
-	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
-	at br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest.usuarioSoPodeEnviarELimparFotosDosPropriosCarrosEAdminPodeDeTodos(CarroUsuarioLogIntegracaoTest.java:192)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-]]></failure>
-    <system-out><![CDATA[2026-11-20T18:33:13.770-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 8, e-mail maria@email.com - por anônimo
-2026-11-20T18:33:13.780-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
-2026-11-20T18:33:13.787-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 9, e-mail joao@email.com - por anônimo
-2026-11-20T18:33:13.795-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Carro - Carro criado: ID 4, modelo Uno - por Maria (maria@email.com)
-2026-11-20T18:33:13.802-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Carro - Carro criado: ID 5, modelo Gol - por Maria (maria@email.com)
-2026-11-20T18:33:13.807-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: joao@email.com - por Joao (joao@email.com)
-2026-11-20T18:33:13.813-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CONSULTAR] Carro - Listagem dos carros do usuário logado - por Joao (joao@email.com)
-2026-11-20T18:33:13.830-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ATUALIZAR] Carro - Imagem atualizada para o carro ID 4 - por Joao (joao@email.com)
-2026-11-20T18:33:13.878-03:00  WARN 25124 --- [LojaCarro] [           main] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.HttpRequestMethodNotSupportedException: Request method 'POST' is not supported]
-
-MockHttpServletRequest:
-      HTTP Method = POST
-      Request URI = /usuario/salvar
-       Parameters = {}
-          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"59"]
-             Body = {"nome":"Maria","email":"maria@email.com","senha":"123456"}
-    Session Attrs = {}
-
-Handler:
-             Type = br.org.edu.ifrn.LojaCarro.controllers.UsuarioController
-           Method = br.org.edu.ifrn.LojaCarro.controllers.UsuarioController#salvarUsuario(Usuario)
-
-Async:
-    Async started = false
-     Async result = null
-
-Resolved Exception:
-             Type = null
-
-ModelAndView:
-        View name = null
-             View = null
-            Model = null
-
-FlashMap:
-       Attributes = null
-
-MockHttpServletResponse:
-           Status = 200
-    Error message = null
-          Headers = [Content-Type:"application/json"]
-     Content type = application/json
-             Body = {"id":8,"nome":"Maria","email":"maria@email.com","dataCadastro":"2026-11-20T18:33:13.7693299","papel":"USER"}
-    Forwarded URL = null
-   Redirected URL = null
-          Cookies = []
-
-MockHttpServletRequest:
-      HTTP Method = POST
-      Request URI = /usuario/login
-       Parameters = {}
-          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"44"]
-             Body = {"email":"maria@email.com","senha":"123456"}
-    Session Attrs = {usuarioLogadoId=8}
-
-Handler:
-             Type = br.org.edu.ifrn.LojaCarro.controllers.UsuarioController
-           Method = br.org.edu.ifrn.LojaCarro.controllers.UsuarioController#login(Usuario)
-
-Async:
-    Async started = false
-     Async result = null
-
-Resolved Exception:
-             Type = null
-
-ModelAndView:
-        View name = null
-             View = null
-            Model = null
-
-FlashMap:
-       Attributes = null
-
-MockHttpServletResponse:
-           Status = 200
-    Error message = null
-          Headers = [Content-Type:"application/json"]
-     Content type = application/json
-             Body = {"id":8,"nome":"Maria","email":"maria@email.com","dataCadastro":"2026-11-20T18:33:13.76933","papel":"ADMIN"}
-    Forwarded URL = null
-   Redirected URL = null
-          Cookies = []
-
-MockHttpServletRequest:
-      HTTP Method = POST
-      Request URI = /usuario/salvar
-       Parameters = {}
-          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"57"]
-             Body = {"nome":"Joao","email":"joao@email.com","senha":"123456"}
-    Session Attrs = {}
-
-Handler:
-             Type = br.org.edu.ifrn.LojaCarro.controllers.UsuarioController
-           Method = br.org.edu.ifrn.LojaCarro.controllers.UsuarioController#salvarUsuario(Usuario)
-
-Async:
-    Async started = false
-     Async result = null
-
-Resolved Exception:
-             Type = null
-
-ModelAndView:
-        View name = null
-             View = null
-            Model = null
-
-FlashMap:
-       Attributes = null
-
-MockHttpServletResponse:
-           Status = 200
-    Error message = null
-          Headers = [Content-Type:"application/json"]
-     Content type = application/json
-             Body = {"id":9,"nome":"Joao","email":"joao@email.com","dataCadastro":"2026-11-20T18:33:13.7850916","papel":"USER"}
-    Forwarded URL = null
-   Redirected URL = null
-          Cookies = []
-
-MockHttpServletRequest:
-      HTTP Method = POST
-      Request URI = /carro/salvar
-       Parameters = {modelo=[Uno], ano=[2021], preco=[20000], usuarioId=[9]}
-          Headers = [Content-Type:"multipart/form-data;charset=UTF-8"]
-             Body = null
-    Session Attrs = {usuarioLogadoId=8}
-
-Handler:
-             Type = br.org.edu.ifrn.LojaCarro.controllers.CarroController
-           Method = br.org.edu.ifrn.LojaCarro.controllers.CarroController#salvarCarro(String, int, double, MultipartFile, Long)
-
-Async:
-    Async started = false
-     Async result = null
-
-Resolved Exception:
-             Type = null
-
-ModelAndView:
-        View name = null
-             View = null
-            Model = null
-
-FlashMap:
-       Attributes = null
-
-MockHttpServletResponse:
-           Status = 200
-    Error message = null
-          Headers = [Content-Type:"application/json"]
-     Content type = application/json
-             Body = {"id":4,"modelo":"Uno","ano":2021,"preco":20000.0,"imagem":null,"cadastradoPor":{"id":9,"nome":"Joao","email":"joao@email.com","dataCadastro":"2026-11-20T18:33:13.785092","papel":"USER"}}
-    Forwarded URL = null
-   Redirected URL = null
-          Cookies = []
-
-MockHttpServletRequest:
-      HTTP Method = POST
-      Request URI = /carro/salvar
-       Parameters = {modelo=[Gol], ano=[2020], preco=[50000]}
-          Headers = [Content-Type:"multipart/form-data;charset=UTF-8"]
-             Body = null
-    Session Attrs = {usuarioLogadoId=8}
-
-Handler:
-             Type = br.org.edu.ifrn.LojaCarro.controllers.CarroController
-           Method = br.org.edu.ifrn.LojaCarro.controllers.CarroController#salvarCarro(String, int, double, MultipartFile, Long)
-
-Async:
-    Async started = false
-     Async result = null
-
-Resolved Exception:
-             Type = null
-
-ModelAndView:
-        View name = null
-             View = null
-            Model = null
-
-FlashMap:
-       Attributes = null
-
-MockHttpServletResponse:
-           Status = 200
-    Error message = null
-          Headers = [Content-Type:"application/json"]
-     Content type = application/json
-             Body = {"id":5,"modelo":"Gol","ano":2020,"preco":50000.0,"imagem":null,"cadastradoPor":{"id":8,"nome":"Maria","email":"maria@email.com","dataCadastro":"2026-11-20T18:33:13.76933","papel":"ADMIN"}}
-    Forwarded URL = null
-   Redirected URL = null
-          Cookies = []
-
-MockHttpServletRequest:
-      HTTP Method = POST
-      Request URI = /usuario/login
-       Parameters = {}
-          Headers = [Content-Type:"application/json;charset=UTF-8", Content-Length:"43"]
-             Body = {"email":"joao@email.com","senha":"123456"}
-    Session Attrs = {usuarioLogadoId=9}
-
-Handler:
-             Type = br.org.edu.ifrn.LojaCarro.controllers.UsuarioController
-           Method = br.org.edu.ifrn.LojaCarro.controllers.UsuarioController#login(Usuario)
-
-Async:
-    Async started = false
-     Async result = null
-
-Resolved Exception:
-             Type = null
-
-ModelAndView:
-        View name = null
-             View = null
-            Model = null
-
-FlashMap:
-       Attributes = null
-
-MockHttpServletResponse:
-           Status = 200
-    Error message = null
-          Headers = [Content-Type:"application/json"]
-     Content type = application/json
-             Body = {"id":9,"nome":"Joao","email":"joao@email.com","dataCadastro":"2026-11-20T18:33:13.785092","papel":"USER"}
-    Forwarded URL = null
-   Redirected URL = null
-          Cookies = []
-
-MockHttpServletRequest:
-      HTTP Method = GET
-      Request URI = /carro/meusCarros
-       Parameters = {}
-          Headers = []
-             Body = null
-    Session Attrs = {usuarioLogadoId=9}
-
-Handler:
-             Type = br.org.edu.ifrn.LojaCarro.controllers.CarroController
-           Method = br.org.edu.ifrn.LojaCarro.controllers.CarroController#listarMeusCarros()
-
-Async:
-    Async started = false
-     Async result = null
-
-Resolved Exception:
-             Type = null
-
-ModelAndView:
-        View name = null
-             View = null
-            Model = null
-
-FlashMap:
-       Attributes = null
-
-MockHttpServletResponse:
-           Status = 200
-    Error message = null
-          Headers = [Content-Type:"application/json"]
-     Content type = application/json
-             Body = [{"id":4,"modelo":"Uno","ano":2021,"preco":20000.0,"imagem":null,"cadastradoPor":{"id":9,"nome":"Joao","email":"joao@email.com","dataCadastro":"2026-11-20T18:33:13.785092","papel":"USER"}}]
-    Forwarded URL = null
-   Redirected URL = null
-          Cookies = []
-
-MockHttpServletRequest:
-      HTTP Method = PUT
-      Request URI = /carro/4/imagem
-       Parameters = {}
-          Headers = [Content-Type:"multipart/form-data;charset=UTF-8"]
-             Body = null
-    Session Attrs = {usuarioLogadoId=9}
-
-Handler:
-             Type = br.org.edu.ifrn.LojaCarro.controllers.CarroController
-           Method = br.org.edu.ifrn.LojaCarro.controllers.CarroController#enviarImagem(Long, MultipartFile)
-
-Async:
-    Async started = false
-     Async result = null
-
-Resolved Exception:
-             Type = null
-
-ModelAndView:
-        View name = null
-             View = null
-            Model = null
-
-FlashMap:
-       Attributes = null
-
-MockHttpServletResponse:
-           Status = 200
-    Error message = null
-          Headers = [Content-Type:"application/json"]
-     Content type = application/json
-             Body = {"id":4,"modelo":"Uno","ano":2021,"preco":20000.0,"imagem":"/uploads/carros/92dc2e63-8bdf-43fb-b43e-b6e6e9668804.png","cadastradoPor":{"id":9,"nome":"Joao","email":"joao@email.com","dataCadastro":"2026-11-20T18:33:13.785092","papel":"USER"}}
-    Forwarded URL = null
-   Redirected URL = null
-          Cookies = []
-
-MockHttpServletRequest:
-      HTTP Method = GET
-      Request URI = /uploads/carros/92dc2e63-8bdf-43fb-b43e-b6e6e9668804.png
-       Parameters = {}
-          Headers = []
-             Body = null
-    Session Attrs = {usuarioLogadoId=9}
-
-Handler:
-             Type = org.springframework.web.servlet.resource.ResourceHttpRequestHandler
-
-Async:
-    Async started = false
-     Async result = null
-
-Resolved Exception:
-             Type = null
-
-ModelAndView:
-        View name = null
-             View = null
-            Model = null
-
-FlashMap:
-       Attributes = null
-
-MockHttpServletResponse:
-           Status = 200
-    Error message = null
-          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", Last-Modified:"Fri, 20 Nov 2026 21:33:13 GMT", Content-Type:"image/png", Accept-Ranges:"bytes", Content-Length:"68"]
-     Content type = image/png
-             Body = PNG
-&amp#26;
-&amp#0;&amp#0;&amp#0;IHDR&amp#0;&amp#0;&amp#0;&amp#1;&amp#0;&amp#0;&amp#0;&amp#1;&amp#8;&amp#4;&amp#0;&amp#0;&amp#0;µ&amp#28;&amp#12;&amp#2;&amp#0;&amp#0;&amp#0;&amp#11;IDATxÚcüÿ&amp#31;&amp#0;&amp#3;&amp#3;&amp#2;&amp#0;ï¿Û&amp#0;&amp#0;&amp#0;&amp#0;IEND®B`
-    Forwarded URL = null
-   Redirected URL = null
-          Cookies = []
-
-MockHttpServletRequest:
-      HTTP Method = POST
-      Request URI = /carro/5/imagem
-       Parameters = {}
-          Headers = [Content-Type:"multipart/form-data;charset=UTF-8"]
-             Body = null
-    Session Attrs = {usuarioLogadoId=9}
-
-Handler:
-             Type = null
-
-Async:
-    Async started = false
-     Async result = null
-
-Resolved Exception:
-             Type = org.springframework.web.HttpRequestMethodNotSupportedException
-
-ModelAndView:
-        View name = null
-             View = null
-            Model = null
-
-FlashMap:
-       Attributes = null
-
-MockHttpServletResponse:
-           Status = 405
-    Error message = Method 'POST' is not supported.
-          Headers = [Allow:"DELETE, PUT"]
-     Content type = null
-             Body = 
-    Forwarded URL = null
-   Redirected URL = null
-          Cookies = []
+  <testcase name="usuarioSoPodeEnviarELimparFotosDosPropriosCarrosEAdminPodeDeTodos" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.189">
+    <system-out><![CDATA[2026-11-20T19:00:41.297-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 8, e-mail maria@email.com - por anônimo
+2026-11-20T19:00:41.306-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
+2026-11-20T19:00:41.316-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 9, e-mail joao@email.com - por anônimo
+2026-11-20T19:00:41.324-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Carro - Carro criado: ID 4, modelo Uno - por Maria (maria@email.com)
+2026-11-20T19:00:41.330-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Carro - Carro criado: ID 5, modelo Gol - por Maria (maria@email.com)
+2026-11-20T19:00:41.340-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ATUALIZAR] Carro - Imagem atualizada para o carro ID 5 - por Maria (maria@email.com)
+2026-11-20T19:00:41.345-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: joao@email.com - por Joao (joao@email.com)
+2026-11-20T19:00:41.351-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CONSULTAR] Carro - Listagem dos carros do usuário logado - por Joao (joao@email.com)
+2026-11-20T19:00:41.366-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ATUALIZAR] Carro - Imagem atualizada para o carro ID 4 - por Joao (joao@email.com)
+2026-11-20T19:00:41.418-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ACESSO_NEGADO] Sistema - Tentativa de acesso sem permissão: GET /uploads/carros/47ca0d80-7cd6-4835-a847-33ce61aca87d.png - por Joao (joao@email.com)
+2026-11-20T19:00:41.424-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ACESSO_NEGADO] Sistema - Tentativa de acesso sem permissão: PUT /carro/5/imagem - por Joao (joao@email.com)
+2026-11-20T19:00:41.429-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ACESSO_NEGADO] Sistema - Tentativa de acesso sem permissão: DELETE /carro/5/imagem - por Joao (joao@email.com)
+2026-11-20T19:00:41.434-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ACESSO_NEGADO] Sistema - Tentativa de acesso sem permissão: DELETE /carro/4 - por Joao (joao@email.com)
+2026-11-20T19:00:41.438-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ACESSO_NEGADO] Sistema - Tentativa de acesso sem permissão: GET /carro/listarCarros - por Joao (joao@email.com)
+2026-11-20T19:00:41.446-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [EXCLUIR] Carro - Imagem removida do carro ID 4 - por Joao (joao@email.com)
+2026-11-20T19:00:41.460-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [EXCLUIR] Carro - Imagem removida do carro ID 5 - por Maria (maria@email.com)
 ]]></system-out>
   </testcase>
-  <testcase name="acessoSemLoginFicaRegistradoNoLog" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.056">
-    <system-out><![CDATA[2026-11-20T18:33:13.926-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 10, e-mail maria@email.com - por anônimo
-2026-11-20T18:33:13.935-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
-2026-11-20T18:33:13.939-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ACESSO_NEGADO] Sistema - Tentativa de acesso sem permissão: GET /carro/listarCarros - por anônimo
+  <testcase name="acessoSemLoginFicaRegistradoNoLog" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.039">
+    <system-out><![CDATA[2026-11-20T19:00:41.486-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 10, e-mail maria@email.com - por anônimo
+2026-11-20T19:00:41.494-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
+2026-11-20T19:00:41.498-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ACESSO_NEGADO] Sistema - Tentativa de acesso sem permissão: GET /carro/listarCarros - por anônimo
 ]]></system-out>
   </testcase>
-  <testcase name="carroGuardaOUsuarioQueCadastrou" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.048">
-    <system-out><![CDATA[2026-11-20T18:33:13.962-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 11, e-mail maria@email.com - por anônimo
-2026-11-20T18:33:13.973-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
-2026-11-20T18:33:13.979-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Carro - Carro criado: ID 6, modelo Gol - por Maria (maria@email.com)
-2026-11-20T18:33:13.984-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CONSULTAR] Carro - Consulta do carro ID 6 - por Maria (maria@email.com)
-2026-11-20T18:33:13.993-03:00  INFO 25124 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ATUALIZAR] Carro - Carro atualizado: ID 6, modelo Uno - por Maria (maria@email.com)
+  <testcase name="carroGuardaOUsuarioQueCadastrou" classname="br.org.edu.ifrn.LojaCarro.controllers.CarroUsuarioLogIntegracaoTest" time="0.054">
+    <system-out><![CDATA[2026-11-20T19:00:41.522-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Usuario - Usuário criado: ID 11, e-mail maria@email.com - por anônimo
+2026-11-20T19:00:41.533-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: maria@email.com - por Maria (maria@email.com)
+2026-11-20T19:00:41.541-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CRIAR] Carro - Carro criado: ID 6, modelo Gol - por Maria (maria@email.com)
+2026-11-20T19:00:41.550-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [CONSULTAR] Carro - Consulta do carro ID 6 - por Maria (maria@email.com)
+2026-11-20T19:00:41.557-03:00  INFO 28692 --- [LojaCarro] [           main] b.o.e.i.LojaCarro.services.LogService    : [ATUALIZAR] Carro - Carro atualizado: ID 6, modelo Uno - por Maria (maria@email.com)
 ]]></system-out>
   </testcase>
 </testsuite>
