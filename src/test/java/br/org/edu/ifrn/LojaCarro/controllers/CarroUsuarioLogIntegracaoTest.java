@@ -227,6 +227,55 @@ class CarroUsuarioLogIntegracaoTest {
     }
 
     @Test
+    void usuarioPodeCadastrarCarroComFotoNaPropriaConta() throws Exception {
+        String respostaUsuario = mockMvc.perform(post("/usuario/salvar").contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"nome\":\"Joao\",\"email\":\"joao@email.com\",\"senha\":\"123456\"}"))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        long idJoao = objectMapper.readTree(respostaUsuario).get("id").asLong();
+        MockHttpSession sessaoJoao = new MockHttpSession();
+        mockMvc.perform(post("/usuario/login").session(sessaoJoao).contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"email\":\"joao@email.com\",\"senha\":\"123456\"}"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(multipart("/carro/salvar").session(sessaoJoao)
+                        .param("modelo", "Gol").param("ano", "2022").param("preco", "25000")
+                        .param("usuarioId", String.valueOf(idUsuario)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.erro").value(containsString("própria conta")));
+
+        String respostaCarro = mockMvc.perform(multipart("/carro/salvar").file(imagemValida()).session(sessaoJoao)
+                        .param("modelo", "Uno").param("ano", "2022").param("preco", "25000"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.cadastradoPor.email").value("joao@email.com"))
+                .andExpect(jsonPath("$.imagem", startsWith("/uploads/carros/")))
+                .andReturn().getResponse().getContentAsString();
+        var carro = objectMapper.readTree(respostaCarro);
+        long idCarro = carro.get("id").asLong();
+        String caminhoImagem = carro.get("imagem").asText();
+        Path arquivoImagem = Path.of(diretorioUploads, "carros",
+                caminhoImagem.substring(caminhoImagem.lastIndexOf('/') + 1));
+
+        try {
+            assertThat(Files.exists(arquivoImagem)).isTrue();
+            mockMvc.perform(get("/carro/meusCarros").session(sessaoJoao))
+                    .andExpect(status().isOk())
+                    .andExpect(jsonPath("$", hasSize(1)))
+                    .andExpect(jsonPath("$[0].id").value(idCarro))
+                    .andExpect(jsonPath("$[0].imagem").value(caminhoImagem));
+            mockMvc.perform(get("/carro/listarCarros").session(sessaoJoao))
+                    .andExpect(status().isForbidden());
+            mockMvc.perform(delete("/carro/" + idCarro).session(sessaoJoao))
+                    .andExpect(status().isForbidden());
+            mockMvc.perform(delete("/carro/" + idCarro + "/imagem").session(sessaoJoao))
+                    .andExpect(status().isNoContent());
+            assertThat(Files.exists(arquivoImagem)).isFalse();
+        } finally {
+            Files.deleteIfExists(arquivoImagem);
+        }
+    }
+
+    @Test
     void naoExcluiUsuarioComCarrosCadastrados() throws Exception {
         salvarCarro("Gol");
 

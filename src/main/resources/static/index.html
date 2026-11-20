@@ -23,7 +23,9 @@
                 return;
             }
             const administrador = usuario.papel === "ADMIN";
-            document.getElementById("linkCarros").hidden = !administrador;
+            document.querySelector("#linkCarros a").textContent = administrador
+                ? "Cadastro de Carros"
+                : "Meus carros";
             document.getElementById("linkUsuarios").hidden = !administrador;
             document.getElementById("linkLogs").hidden = !administrador;
         });

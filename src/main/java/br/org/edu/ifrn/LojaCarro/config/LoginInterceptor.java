@@ -65,6 +65,10 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
 
+        if ("/carro/salvar".equals(caminho) && "POST".equals(metodo)) {
+            return true;
+        }
+
         Matcher rotaImagem = ROTA_IMAGEM_CARRO.matcher(caminho);
         if (rotaImagem.matches()) {
             if (administrador) {

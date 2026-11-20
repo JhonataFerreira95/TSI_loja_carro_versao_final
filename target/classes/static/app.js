@@ -10,7 +10,7 @@ async function montarMenu() {
     const usuario = await resposta.json();
     const administrador = usuario.papel === "ADMIN";
     const pagina = window.location.pathname.split("/").pop();
-    if (!administrador && (pagina === "carros.html" || pagina === "logs.html")) {
+    if (!administrador && pagina === "logs.html") {
         window.location.href = "usuarios.html";
         return null;
     }
@@ -21,7 +21,8 @@ async function montarMenu() {
         (administrador
             ? '<a href="carros.html">Carros</a><a href="usuarios.html">Usuários</a>'
                 + '<a href="minhas-fotos.html">Minhas fotos</a><a href="logs.html">Logs</a>'
-            : '<a href="usuarios.html">Minha conta</a><a href="minhas-fotos.html">Minhas fotos</a>') +
+            : '<a href="carros.html">Meus carros</a><a href="usuarios.html">Minha conta</a>'
+                + '<a href="minhas-fotos.html">Minhas fotos</a>') +
         ' | Logado como <b id="nomeLogado"></b> ' +
         '<button type="button" onclick="sair()">Sair</button>';
     document.getElementById("nomeLogado").textContent = usuario.nome;

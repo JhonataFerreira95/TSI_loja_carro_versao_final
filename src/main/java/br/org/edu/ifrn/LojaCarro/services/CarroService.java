@@ -2,6 +2,7 @@ package br.org.edu.ifrn.LojaCarro.services;
 
 import br.org.edu.ifrn.LojaCarro.CarroException;
 import br.org.edu.ifrn.LojaCarro.model.Carro;
+import br.org.edu.ifrn.LojaCarro.model.PapelUsuario;
 import br.org.edu.ifrn.LojaCarro.model.Usuario;
 import br.org.edu.ifrn.LojaCarro.repository.CarroRepository;
 import br.org.edu.ifrn.LojaCarro.repository.UsuarioRepository;
@@ -45,9 +46,14 @@ public class CarroService {
     public Carro save(Carro c, MultipartFile imagem, Long usuarioId) {
         validarModelo(c.getModelo());  // Valida o modelo antes de salvar
         validarPreco(c.getPreco());
-        Usuario responsavel = usuarioId == null
-                ? sessaoService.usuarioLogado().orElse(null)
-                : buscarUsuario(usuarioId);
+        Usuario usuarioLogado = sessaoService.usuarioLogado().orElse(null);
+        boolean administrador = usuarioLogado != null
+                && usuarioLogado.getPapel() == PapelUsuario.ADMIN;
+        if (!administrador && usuarioId != null
+                && (usuarioLogado == null || !usuarioId.equals(usuarioLogado.getId()))) {
+            throw new CarroException("Usuários comuns só podem cadastrar carros na própria conta.");
+        }
+        Usuario responsavel = administrador && usuarioId != null ? buscarUsuario(usuarioId) : usuarioLogado;
         salvarImagemSeInformada(c, imagem);
         c.setCadastradoPor(responsavel);
         Carro salvo = carroRepository.save(c);
