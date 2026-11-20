@@ -1,5 +1,6 @@
 package br.org.edu.ifrn.LojaCarro.controllers;
 
+import br.org.edu.ifrn.LojaCarro.model.PapelUsuario;
 import br.org.edu.ifrn.LojaCarro.repository.CarroRepository;
 import br.org.edu.ifrn.LojaCarro.repository.LogRepository;
 import br.org.edu.ifrn.LojaCarro.repository.UsuarioRepository;
@@ -51,6 +52,9 @@ class CarroUsuarioLogIntegracaoTest {
                         .content("{\"nome\":\"Maria\",\"email\":\"maria@email.com\",\"senha\":\"123456\"}"))
                 .andReturn().getResponse().getContentAsString();
         idUsuario = objectMapper.readTree(resposta).get("id").asLong();
+        var maria = usuarioRepository.findById(idUsuario).orElseThrow();
+        maria.setPapel(PapelUsuario.ADMIN);
+        usuarioRepository.save(maria);
 
         sessao = new MockHttpSession();
         mockMvc.perform(post("/usuario/login").session(sessao).contentType(MediaType.APPLICATION_JSON)
@@ -97,8 +101,13 @@ class CarroUsuarioLogIntegracaoTest {
         salvarCarro("Gol");
 
         // Outro usuário tenta excluir a Maria, que tem um carro
-        mockMvc.perform(post("/usuario/salvar").contentType(MediaType.APPLICATION_JSON)
-                .content("{\"nome\":\"Joao\",\"email\":\"joao@email.com\",\"senha\":\"123456\"}"));
+        String respostaJoao = mockMvc.perform(post("/usuario/salvar").contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"nome\":\"Joao\",\"email\":\"joao@email.com\",\"senha\":\"123456\"}"))
+                .andReturn().getResponse().getContentAsString();
+        long idJoao = objectMapper.readTree(respostaJoao).get("id").asLong();
+        var joao = usuarioRepository.findById(idJoao).orElseThrow();
+        joao.setPapel(PapelUsuario.ADMIN);
+        usuarioRepository.save(joao);
         MockHttpSession sessaoJoao = new MockHttpSession();
         mockMvc.perform(post("/usuario/login").session(sessaoJoao).contentType(MediaType.APPLICATION_JSON)
                 .content("{\"email\":\"joao@email.com\",\"senha\":\"123456\"}"));
@@ -137,5 +146,20 @@ class CarroUsuarioLogIntegracaoTest {
         mockMvc.perform(get("/log").session(sessao))
                 .andExpect(jsonPath("$[0].acao").value("ACESSO_NEGADO"))
                 .andExpect(jsonPath("$[0].descricao").value(containsString("/carro/listarCarros")));
+    }
+
+    @Test
+    void usuarioComumNaoAcessaCarrosNemLogs() throws Exception {
+        mockMvc.perform(post("/usuario/salvar").contentType(MediaType.APPLICATION_JSON)
+                .content("{\"nome\":\"Joao\",\"email\":\"joao@email.com\",\"senha\":\"123456\"}"));
+        MockHttpSession sessaoJoao = new MockHttpSession();
+        mockMvc.perform(post("/usuario/login").session(sessaoJoao).contentType(MediaType.APPLICATION_JSON)
+                .content("{\"email\":\"joao@email.com\",\"senha\":\"123456\"}"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/carro/listarCarros").session(sessaoJoao))
+                .andExpect(status().isForbidden());
+        mockMvc.perform(get("/log").session(sessaoJoao))
+                .andExpect(status().isForbidden());
     }
 }

@@ -3,6 +3,7 @@ package br.org.edu.ifrn.LojaCarro.controllers;
 import br.org.edu.ifrn.LojaCarro.repository.CarroRepository;
 import br.org.edu.ifrn.LojaCarro.repository.LogRepository;
 import br.org.edu.ifrn.LojaCarro.repository.UsuarioRepository;
+import br.org.edu.ifrn.LojaCarro.model.PapelUsuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,6 +52,14 @@ class UsuarioControllerTest {
         return objectMapper.readTree(resposta).get("id").asLong();
     }
 
+    private long criarAdministrador(String nome, String email) throws Exception {
+        long id = criarUsuario(nome, email);
+        var usuario = usuarioRepository.findById(id).orElseThrow();
+        usuario.setPapel(PapelUsuario.ADMIN);
+        usuarioRepository.save(usuario);
+        return id;
+    }
+
     private MockHttpSession logar(String email) throws Exception {
         MockHttpSession sessao = new MockHttpSession();
         mockMvc.perform(post("/usuario/login").session(sessao).contentType(MediaType.APPLICATION_JSON)
@@ -61,7 +70,7 @@ class UsuarioControllerTest {
 
     @Test
     void crudCompletoDeUsuario() throws Exception {
-        criarUsuario("Admin", "admin@email.com");
+        criarAdministrador("Admin", "admin@email.com");
         MockHttpSession sessao = logar("admin@email.com");
         long id = criarUsuario("Maria", "maria@email.com");
 
@@ -72,9 +81,10 @@ class UsuarioControllerTest {
                 .andExpect(jsonPath("$.senha").doesNotExist());
 
         mockMvc.perform(put("/usuario/" + id).session(sessao).contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"nome\":\"Maria Silva\",\"email\":\"maria@email.com\",\"senha\":\"\"}"))
+                        .content("{\"nome\":\"Maria Silva\",\"email\":\"maria@email.com\",\"senha\":\"\",\"papel\":\"ADMIN\"}"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.nome").value("Maria Silva"));
+                .andExpect(jsonPath("$.nome").value("Maria Silva"))
+                .andExpect(jsonPath("$.papel").value("ADMIN"));
 
         mockMvc.perform(get("/usuario/listarUsuarios").session(sessao))
                 .andExpect(status().isOk())
@@ -85,6 +95,55 @@ class UsuarioControllerTest {
 
         mockMvc.perform(get("/usuario/" + id).session(sessao))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void usuarioComumSoPodeConsultarEAtualizarPropriaConta() throws Exception {
+        long idAna = criarUsuario("Ana", "ana@email.com");
+        long idJoao = criarUsuario("Joao", "joao@email.com");
+        MockHttpSession sessao = logar("ana@email.com");
+
+        mockMvc.perform(get("/usuario/" + idAna).session(sessao))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.papel").value("USER"));
+        mockMvc.perform(put("/usuario/" + idAna).session(sessao).contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"nome\":\"Ana Silva\",\"email\":\"ana@email.com\",\"papel\":\"ADMIN\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.nome").value("Ana Silva"))
+                .andExpect(jsonPath("$.papel").value("USER"));
+
+        mockMvc.perform(get("/usuario/" + idJoao).session(sessao)).andExpect(status().isForbidden());
+        mockMvc.perform(get("/usuario/999999999999999999999999").session(sessao))
+                .andExpect(status().isForbidden());
+        mockMvc.perform(put("/usuario/" + idJoao).session(sessao).contentType(MediaType.APPLICATION_JSON)
+                .content("{\"nome\":\"Joao Alterado\",\"email\":\"joao@email.com\"}"))
+                .andExpect(status().isForbidden());
+        mockMvc.perform(get("/usuario/listarUsuarios").session(sessao)).andExpect(status().isForbidden());
+        mockMvc.perform(get("/log").session(sessao)).andExpect(status().isForbidden());
+        mockMvc.perform(get("/carro/listarCarros").session(sessao)).andExpect(status().isForbidden());
+        mockMvc.perform(post("/usuario/salvar").session(sessao).contentType(MediaType.APPLICATION_JSON)
+                .content("{\"nome\":\"Outra\",\"email\":\"outra@email.com\",\"senha\":\"123456\"}"))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void cadastroPublicoNaoPodeCriarAdministrador() throws Exception {
+        mockMvc.perform(post("/usuario/salvar").contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"nome\":\"Eve\",\"email\":\"eve@email.com\",\"senha\":\"123456\",\"papel\":\"ADMIN\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.papel").value("USER"));
+    }
+
+    @Test
+    void administradorPodeCriarOutroAdministrador() throws Exception {
+        criarAdministrador("Admin", "admin@email.com");
+        MockHttpSession sessao = logar("admin@email.com");
+
+        mockMvc.perform(post("/usuario/salvar").session(sessao).contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"nome\":\"Outro Admin\",\"email\":\"outro@email.com\","
+                                + "\"senha\":\"123456\",\"papel\":\"ADMIN\"}"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.papel").value("ADMIN"));
     }
 
     @Test
@@ -137,11 +196,19 @@ class UsuarioControllerTest {
 
     @Test
     void naoPermiteExcluirOUsuarioLogado() throws Exception {
-        long id = criarUsuario("Joao", "joao@email.com");
+        long id = criarAdministrador("Joao", "joao@email.com");
         MockHttpSession sessao = logar("joao@email.com");
 
         mockMvc.perform(delete("/usuario/" + id).session(sessao))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.erro").value("Não é possível excluir o usuário que está logado."));
+    }
+
+    @Test
+    void administradorPodeConsultarLogs() throws Exception {
+        criarAdministrador("Admin", "admin@email.com");
+        MockHttpSession sessao = logar("admin@email.com");
+
+        mockMvc.perform(get("/log").session(sessao)).andExpect(status().isOk());
     }
 }

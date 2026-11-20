@@ -125,7 +125,11 @@
         }
 
         document.getElementById("formCarro").addEventListener("submit", salvarCarro);
-        montarMenu().then(listarCarros);
+        montarMenu().then(function (usuario) {
+            if (usuario) {
+                listarCarros();
+            }
+        });
     </script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package br.org.edu.ifrn.LojaCarro.services;
 
 import br.org.edu.ifrn.LojaCarro.UsuarioException;
+import br.org.edu.ifrn.LojaCarro.model.PapelUsuario;
 import br.org.edu.ifrn.LojaCarro.model.Usuario;
 import br.org.edu.ifrn.LojaCarro.repository.CarroRepository;
 import br.org.edu.ifrn.LojaCarro.repository.UsuarioRepository;
@@ -58,6 +59,12 @@ public class UsuarioService {
         u.setId(null);
         u.setSenha(criptografarSenha(u.getSenha()));
         u.setDataCadastro(LocalDateTime.now());
+        boolean criadoPorAdministrador = sessaoService.usuarioLogado()
+                .map(usuario -> usuario.getPapel() == PapelUsuario.ADMIN)
+                .orElse(false);
+        if (!criadoPorAdministrador || u.getPapel() == null) {
+            u.setPapel(PapelUsuario.USER);
+        }
         Usuario salvo = usuarioRepository.save(u);
         logService.registrar("CRIAR", ENTIDADE, "Usuário criado: ID " + salvo.getId() + ", e-mail " + salvo.getEmail());
         return salvo;
@@ -78,6 +85,12 @@ public class UsuarioService {
         if (u.getSenha() != null && !u.getSenha().isBlank()) {
             validarSenha(u.getSenha());
             existente.setSenha(criptografarSenha(u.getSenha()));
+        }
+        boolean atualizadoPorAdministrador = sessaoService.usuarioLogado()
+                .map(usuario -> usuario.getPapel() == PapelUsuario.ADMIN)
+                .orElse(false);
+        if (atualizadoPorAdministrador && u.getPapel() != null) {
+            existente.setPapel(u.getPapel());
         }
         Usuario atualizado = usuarioRepository.save(existente);
         logService.registrar("ATUALIZAR", ENTIDADE, "Usuário atualizado: ID " + atualizado.getId() + ", e-mail " + atualizado.getEmail());

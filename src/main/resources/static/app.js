@@ -8,13 +8,20 @@ async function montarMenu() {
         throw new Error("Usuário não logado");
     }
     const usuario = await resposta.json();
+    const administrador = usuario.papel === "ADMIN";
+    const pagina = window.location.pathname.split("/").pop();
+    if (!administrador && (pagina === "carros.html" || pagina === "logs.html")) {
+        window.location.href = "usuarios.html";
+        return null;
+    }
 
     const menu = document.getElementById("menu");
     menu.innerHTML =
         '<a href="index.html">Início</a>' +
-        '<a href="carros.html">Carros</a>' +
-        '<a href="usuarios.html">Usuários</a>' +
-        '<a href="logs.html">Logs</a>' +
+        (administrador
+            ? '<a href="carros.html">Carros</a><a href="usuarios.html">Usuários</a>'
+                + '<a href="logs.html">Logs</a>'
+            : '<a href="usuarios.html">Minha conta</a>') +
         ' | Logado como <b id="nomeLogado"></b> ' +
         '<button type="button" onclick="sair()">Sair</button>';
     document.getElementById("nomeLogado").textContent = usuario.nome;

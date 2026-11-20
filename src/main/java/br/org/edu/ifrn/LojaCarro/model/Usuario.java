@@ -18,6 +18,9 @@ public class Usuario {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String senha;
     private LocalDateTime dataCadastro;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20, columnDefinition = "varchar(20) default 'USER'")
+    private PapelUsuario papel = PapelUsuario.USER;
 
     public Usuario() {
     }
@@ -66,5 +69,13 @@ public class Usuario {
 
     public void setDataCadastro(LocalDateTime dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    public PapelUsuario getPapel() {
+        return papel;
+    }
+
+    public void setPapel(PapelUsuario papel) {
+        this.papel = papel;
     }
 }

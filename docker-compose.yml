@@ -1,4 +1,23 @@
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: loja-carro-app
+    environment:
+      SERVER: prod
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/carros
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      UPLOADS_DIR: /app/uploads
+    ports:
+      - "8080:8080"
+    volumes:
+      - app_uploads:/app/uploads
+    depends_on:
+      mysql:
+        condition: service_healthy
+
   mysql:
     image: mysql:8.4
     container_name: loja-carro-mysql
@@ -18,3 +37,4 @@ services:
 
 volumes:
   mysql_data:
+  app_uploads:

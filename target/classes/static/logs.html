@@ -40,7 +40,11 @@
             });
         }
 
-        montarMenu().then(listarLogs);
+        montarMenu().then(function (usuario) {
+            if (usuario) {
+                listarLogs();
+            }
+        });
     </script>
 </body>
 </html>

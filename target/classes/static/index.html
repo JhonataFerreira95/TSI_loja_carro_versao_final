@@ -11,13 +11,21 @@
 
     <h1>Loja de Carro</h1>
     <ul>
-        <li><a href="carros.html">Cadastro de Carros</a></li>
-        <li><a href="usuarios.html">Cadastro de Usuários</a></li>
-        <li><a href="logs.html">Logs do Sistema</a></li>
+        <li id="linkCarros"><a href="carros.html">Cadastro de Carros</a></li>
+        <li id="linkUsuarios"><a href="usuarios.html">Gerenciar Usuários</a></li>
+        <li id="linkLogs"><a href="logs.html">Logs do Sistema</a></li>
     </ul>
 
     <script>
-        montarMenu();
+        montarMenu().then(function (usuario) {
+            if (!usuario) {
+                return;
+            }
+            const administrador = usuario.papel === "ADMIN";
+            document.getElementById("linkCarros").hidden = !administrador;
+            document.getElementById("linkUsuarios").hidden = !administrador;
+            document.getElementById("linkLogs").hidden = !administrador;
+        });
     </script>
 </body>
 </html>
