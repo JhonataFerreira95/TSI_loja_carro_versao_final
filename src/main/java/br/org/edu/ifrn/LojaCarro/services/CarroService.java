@@ -5,6 +5,7 @@ import br.org.edu.ifrn.LojaCarro.model.Carro;
 import br.org.edu.ifrn.LojaCarro.repository.CarroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,9 +29,13 @@ public class CarroService {
     private ImagemCarroService imagemCarroService;
 
     public Carro save(Carro c) {
+        return save(c, null);
+    }
+
+    public Carro save(Carro c, MultipartFile imagem) {
         validarModelo(c.getModelo());  // Valida o modelo antes de salvar
         validarPreco(c.getPreco());
-        salvarImagemSeInformada(c);
+        salvarImagemSeInformada(c, imagem);
         c.setCadastradoPor(sessaoService.usuarioLogado().orElse(null));
         Carro salvo = carroRepository.save(c);
         logService.registrar("CRIAR", ENTIDADE, "Carro criado: ID " + salvo.getId() + ", modelo " + salvo.getModelo());
@@ -90,6 +95,10 @@ public class CarroService {
 
     // Método para atualizar (usa o save existente, mas pode ser renomeado se preferir)
     public Carro update(Carro c) {
+        return update(c, null);
+    }
+
+    public Carro update(Carro c, MultipartFile imagem) {
         if (c.getId() == null) {
             throw new CarroException("O ID do carro para atualização não pode ser nulo.");
         }
@@ -98,16 +107,16 @@ public class CarroService {
         validarModelo(c.getModelo());  // Valida o modelo antes de atualizar
         validarPreco(c.getPreco());
         c.setImagem(existente.getImagem());
-        salvarImagemSeInformada(c);
+        salvarImagemSeInformada(c, imagem);
         c.setCadastradoPor(existente.getCadastradoPor());  // Mantém quem cadastrou o carro
         Carro atualizado = carroRepository.save(c);  // Retorna o carro salvo para feedback
         logService.registrar("ATUALIZAR", ENTIDADE, "Carro atualizado: ID " + atualizado.getId() + ", modelo " + atualizado.getModelo());
         return atualizado;
     }
 
-    private void salvarImagemSeInformada(Carro carro) {
-        if (carro.getImagemUrl() != null && !carro.getImagemUrl().isBlank()) {
-            carro.setImagem(imagemCarroService.salvarDaUrl(carro.getImagemUrl()));
+    private void salvarImagemSeInformada(Carro carro, MultipartFile imagem) {
+        if (imagem != null && !imagem.isEmpty()) {
+            carro.setImagem(imagemCarroService.salvar(imagem));
         }
     }
 

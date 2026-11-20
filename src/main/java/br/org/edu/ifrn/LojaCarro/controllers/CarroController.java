@@ -7,6 +7,7 @@ import br.org.edu.ifrn.LojaCarro.services.CarroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,17 +21,27 @@ public class CarroController {
     private CarroService carroService;
 
     // Salvar carro (corrigido para POST)
-    @PostMapping("salvar")
-    public ResponseEntity<Carro> salvarCarro(@RequestBody Carro c) {
-        Carro savedCarro = carroService.save(c);
+    @PostMapping(value = "salvar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Carro> salvarCarro(
+            @RequestParam("modelo") String modelo,
+            @RequestParam("ano") int ano,
+            @RequestParam("preco") double preco,
+            @RequestParam(value = "imagem", required = false) MultipartFile imagem) {
+        Carro savedCarro = carroService.save(new Carro(modelo, ano, preco), imagem);
         return ResponseEntity.ok(savedCarro);
     }
 
     // Atualizar carro (por ID)
-    @PutMapping("/{id}")
-    public ResponseEntity<Carro> atualizarCarro(@PathVariable Long id, @RequestBody Carro c) {
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Carro> atualizarCarro(
+            @PathVariable Long id,
+            @RequestParam("modelo") String modelo,
+            @RequestParam("ano") int ano,
+            @RequestParam("preco") double preco,
+            @RequestParam(value = "imagem", required = false) MultipartFile imagem) {
+        Carro c = new Carro(modelo, ano, preco);
         c.setId(id);  // Define o ID no objeto
-        Carro updatedCarro = carroService.update(c);
+        Carro updatedCarro = carroService.update(c, imagem);
         return ResponseEntity.ok(updatedCarro);
     }
 

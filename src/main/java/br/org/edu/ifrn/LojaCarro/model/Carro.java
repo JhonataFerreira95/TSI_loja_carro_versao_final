@@ -14,10 +14,6 @@ public class Carro {
     double preco;
     private String imagem;
 
-    @Transient
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String imagemUrl;
-
     // Usuário que cadastrou o carro
     @ManyToOne
     @JoinColumn(name = "usuario_id")
@@ -78,14 +74,6 @@ public class Carro {
 
     public void setImagem(String imagem) {
         this.imagem = imagem;
-    }
-
-    public String getImagemUrl() {
-        return imagemUrl;
-    }
-
-    public void setImagemUrl(String imagemUrl) {
-        this.imagemUrl = imagemUrl;
     }
 
     public Usuario getCadastradoPor() {

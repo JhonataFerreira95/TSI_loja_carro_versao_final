@@ -8,11 +8,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockHttpSession;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.web.servlet.MockMvc;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Base64;
 
 import static org.hamcrest.Matchers.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,6 +45,9 @@ class CarroUsuarioLogIntegracaoTest {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Value("${app.uploads.directory}")
+    private String diretorioUploads;
+
     private MockHttpSession sessao;
     private long idUsuario;
 
@@ -63,8 +72,8 @@ class CarroUsuarioLogIntegracaoTest {
     }
 
     private long salvarCarro(String modelo) throws Exception {
-        String resposta = mockMvc.perform(post("/carro/salvar").session(sessao).contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"modelo\":\"" + modelo + "\",\"ano\":2020,\"preco\":50000}"))
+        String resposta = mockMvc.perform(multipart("/carro/salvar").session(sessao)
+                        .param("modelo", modelo).param("ano", "2020").param("preco", "50000"))
                 .andExpect(status().isOk())
                 .andReturn().getResponse().getContentAsString();
         return objectMapper.readTree(resposta).get("id").asLong();
@@ -80,19 +89,51 @@ class CarroUsuarioLogIntegracaoTest {
                 .andExpect(jsonPath("$.cadastradoPor.senha").doesNotExist());
 
         // Atualizar o carro não perde quem o cadastrou
-        mockMvc.perform(put("/carro/" + idCarro).session(sessao).contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"modelo\":\"Uno\",\"ano\":2021,\"preco\":40000}"))
+        mockMvc.perform(multipart("/carro/" + idCarro).session(sessao)
+                        .param("modelo", "Uno").param("ano", "2021").param("preco", "40000")
+                        .with(request -> {
+                            request.setMethod("PUT");
+                            return request;
+                        }))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.cadastradoPor.email").value("maria@email.com"));
     }
 
     @Test
-    void rejeitaImagemComUrlApontandoParaEnderecoLocal() throws Exception {
-        mockMvc.perform(post("/carro/salvar").session(sessao).contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"modelo\":\"Gol\",\"ano\":2020,\"preco\":50000,"
-                                + "\"imagemUrl\":\"http://127.0.0.1/imagem.png\"}"))
+    void uploadSalvaArquivoLocalEArmazenaApenasOCaminhoNoCarro() throws Exception {
+        byte[] conteudo = Base64.getDecoder().decode(
+                "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/l9sAAAAASUVORK5CYII=");
+        MockMultipartFile imagem = new MockMultipartFile("imagem", "carro.png", "image/png", conteudo);
+
+        String corpo = mockMvc.perform(multipart("/carro/salvar").file(imagem).session(sessao)
+                        .param("modelo", "Gol").param("ano", "2020").param("preco", "50000"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.imagem", startsWith("/uploads/carros/")))
+                .andReturn().getResponse().getContentAsString();
+
+        String caminhoImagem = objectMapper.readTree(corpo).get("imagem").asText();
+        Path arquivoSalvo = Path.of(diretorioUploads, "carros",
+                caminhoImagem.substring(caminhoImagem.lastIndexOf('/') + 1));
+        try {
+            assertThat(Files.readAllBytes(arquivoSalvo)).containsExactly(conteudo);
+            assertThat(carroRepository.findAll()).singleElement()
+                    .extracting(carro -> carro.getImagem())
+                    .isEqualTo(caminhoImagem);
+        } finally {
+            Files.deleteIfExists(arquivoSalvo);
+        }
+    }
+
+    @Test
+    void rejeitaArquivoQueNaoEImagem() throws Exception {
+        MockMultipartFile arquivo = new MockMultipartFile("imagem", "arquivo.txt",
+                "text/plain", "nao e uma imagem".getBytes());
+
+        mockMvc.perform(multipart("/carro/salvar").file(arquivo).session(sessao)
+                        .param("modelo", "Gol").param("ano", "2020").param("preco", "50000"))
                 .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.erro").value(containsString("endereço local ou privado")));
+                .andExpect(jsonPath("$.erro").value(containsString("imagem JPEG, PNG, GIF ou WebP")));
+
         assertThat(carroRepository.findAll()).isEmpty();
     }
 
@@ -120,8 +161,8 @@ class CarroUsuarioLogIntegracaoTest {
     @Test
     void logsRegistramQuemFezCadaAcao() throws Exception {
         salvarCarro("Gol");
-        mockMvc.perform(post("/carro/salvar").session(sessao).contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"modelo\":\"Modelo Grande\",\"ano\":2020,\"preco\":1}"))
+        mockMvc.perform(multipart("/carro/salvar").session(sessao)
+                        .param("modelo", "Modelo Grande").param("ano", "2020").param("preco", "1"))
                 .andExpect(status().isBadRequest());
 
         // Logs vêm do mais recente para o mais antigo

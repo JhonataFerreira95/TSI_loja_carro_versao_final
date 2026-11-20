@@ -23,8 +23,8 @@
         <label for="preco">Preço:</label>
         <input type="number" id="preco" step="0.01" min="0" required>
 
-        <label for="imagemUrl">URL da imagem (opcional):</label>
-        <input type="url" id="imagemUrl" maxlength="2048" placeholder="https://exemplo.com/carro.jpg">
+        <label for="imagem">Imagem do computador (opcional):</label>
+        <input type="file" id="imagem" accept="image/jpeg,image/png,image/gif,image/webp">
 
         <br>
         <button type="submit" id="btnSalvar">Cadastrar</button>
@@ -77,16 +77,19 @@
         async function salvarCarro(evento) {
             evento.preventDefault();
             const id = document.getElementById("id").value;
-            const carro = {
-                modelo: document.getElementById("modelo").value,
-                ano: Number(document.getElementById("ano").value),
-                preco: Number(document.getElementById("preco").value),
-                imagemUrl: document.getElementById("imagemUrl").value.trim()
-            };
+            const dados = new FormData();
+            dados.append("modelo", document.getElementById("modelo").value);
+            dados.append("ano", document.getElementById("ano").value);
+            dados.append("preco", document.getElementById("preco").value);
+            const imagem = document.getElementById("imagem").files[0];
+            if (imagem) {
+                dados.append("imagem", imagem);
+            }
 
-            const resposta = id
-                ? await enviarJson("/carro/" + id, "PUT", carro)
-                : await enviarJson("/carro/salvar", "POST", carro);
+            const resposta = await api(id ? "/carro/" + id : "/carro/salvar", {
+                method: id ? "PUT" : "POST",
+                body: dados
+            });
 
             if (resposta.ok) {
                 mostrarMensagem(id ? "Carro atualizado com sucesso." : "Carro cadastrado com sucesso.", false);
@@ -102,6 +105,7 @@
             document.getElementById("modelo").value = c.modelo;
             document.getElementById("ano").value = c.ano;
             document.getElementById("preco").value = c.preco;
+            document.getElementById("imagem").value = "";
             document.getElementById("btnSalvar").textContent = "Atualizar";
         }
 
