@@ -16,6 +16,7 @@ import java.util.UUID;
 public class ImagemCarroService {
 
     private static final int TAMANHO_MAXIMO = 5 * 1024 * 1024;
+    private static final String PREFIXO_CAMINHO = "/uploads/carros/";
     private final Path diretorioImagens;
 
     public ImagemCarroService(@Value("${app.uploads.directory:uploads}") String diretorioUploads) {
@@ -46,6 +47,31 @@ public class ImagemCarroService {
             return "/uploads/carros/" + nomeArquivo;
         } catch (IOException ex) {
             throw new CarroException("Não foi possível salvar a imagem enviada.");
+        }
+    }
+
+    public void remover(String caminhoImagem) {
+        if (caminhoImagem == null) {
+            return;
+        }
+        if (!caminhoImagem.startsWith(PREFIXO_CAMINHO)) {
+            throw new CarroException("A imagem não aponta para um arquivo local gerenciado pela aplicação.");
+        }
+
+        String nomeArquivo = caminhoImagem.substring(PREFIXO_CAMINHO.length());
+        if (nomeArquivo.isBlank() || nomeArquivo.contains("/") || nomeArquivo.contains("\\")) {
+            throw new CarroException("O caminho da imagem armazenado é inválido.");
+        }
+
+        Path arquivo = diretorioImagens.resolve(nomeArquivo).normalize();
+        if (!arquivo.startsWith(diretorioImagens)) {
+            throw new CarroException("O caminho da imagem armazenado é inválido.");
+        }
+
+        try {
+            Files.deleteIfExists(arquivo);
+        } catch (IOException ex) {
+            throw new CarroException("Não foi possível remover a imagem do armazenamento local.");
         }
     }
 

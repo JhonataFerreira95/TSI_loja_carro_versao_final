@@ -2,13 +2,16 @@ package br.org.edu.ifrn.LojaCarro.services;
 
 import br.org.edu.ifrn.LojaCarro.CarroException;
 import br.org.edu.ifrn.LojaCarro.model.Carro;
+import br.org.edu.ifrn.LojaCarro.model.Usuario;
 import br.org.edu.ifrn.LojaCarro.repository.CarroRepository;
+import br.org.edu.ifrn.LojaCarro.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -18,6 +21,9 @@ public class CarroService {
 
     @Autowired
     public CarroRepository carroRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
 
     @Autowired
     private LogService logService;
@@ -33,10 +39,17 @@ public class CarroService {
     }
 
     public Carro save(Carro c, MultipartFile imagem) {
+        return save(c, imagem, null);
+    }
+
+    public Carro save(Carro c, MultipartFile imagem, Long usuarioId) {
         validarModelo(c.getModelo());  // Valida o modelo antes de salvar
         validarPreco(c.getPreco());
+        Usuario responsavel = usuarioId == null
+                ? sessaoService.usuarioLogado().orElse(null)
+                : buscarUsuario(usuarioId);
         salvarImagemSeInformada(c, imagem);
-        c.setCadastradoPor(sessaoService.usuarioLogado().orElse(null));
+        c.setCadastradoPor(responsavel);
         Carro salvo = carroRepository.save(c);
         logService.registrar("CRIAR", ENTIDADE, "Carro criado: ID " + salvo.getId() + ", modelo " + salvo.getModelo());
         return salvo;
@@ -47,7 +60,10 @@ public class CarroService {
         if(id <= 0){
             throw new CarroException("O ID do carro não pode ser negativo. ID fornecido: " + id);
         }
-        carroRepository.deleteById(id);
+        Carro carro = carroRepository.findById(id)
+                .orElseThrow(() -> new CarroException("Carro com ID " + id + " não encontrado."));
+        imagemCarroService.remover(carro.getImagem());
+        carroRepository.delete(carro);
         logService.registrar("EXCLUIR", ENTIDADE, "Carro excluído: ID " + id);
     }
 
@@ -64,6 +80,39 @@ public class CarroService {
     public List<Carro> findAll() {
         logService.registrar("CONSULTAR", ENTIDADE, "Listagem de todos os carros");
         return carroRepository.findAll();
+    }
+
+    public List<Carro> findMeusCarros() {
+        Long usuarioId = sessaoService.usuarioLogado()
+                .orElseThrow(() -> new IllegalStateException("Não há usuário autenticado."))
+                .getId();
+        logService.registrar("CONSULTAR", ENTIDADE, "Listagem dos carros do usuário logado");
+        return carroRepository.findAllByCadastradoPor_Id(usuarioId);
+    }
+
+    public Carro atualizarImagem(Long id, MultipartFile imagem) {
+        if (imagem == null || imagem.isEmpty()) {
+            throw new CarroException("Selecione uma imagem para enviar.");
+        }
+        Carro carro = carroRepository.findById(id)
+                .orElseThrow(() -> new CarroException("Carro com ID " + id + " não encontrado."));
+        String imagemAnterior = carro.getImagem();
+        carro.setImagem(imagemCarroService.salvar(imagem));
+        Carro atualizado = carroRepository.save(carro);
+        if (!Objects.equals(imagemAnterior, atualizado.getImagem())) {
+            imagemCarroService.remover(imagemAnterior);
+        }
+        logService.registrar("ATUALIZAR", ENTIDADE, "Imagem atualizada para o carro ID " + id);
+        return atualizado;
+    }
+
+    public void removerImagem(Long id) {
+        Carro carro = carroRepository.findById(id)
+                .orElseThrow(() -> new CarroException("Carro com ID " + id + " não encontrado."));
+        imagemCarroService.remover(carro.getImagem());
+        carro.setImagem(null);
+        carroRepository.save(carro);
+        logService.registrar("EXCLUIR", ENTIDADE, "Imagem removida do carro ID " + id);
     }
 
     public Optional<Carro> findByModelo(String modelo) {
@@ -88,6 +137,7 @@ public class CarroService {
 
     public Carro deleteByModelo(String modelo) {
         Carro carro = localizarCarroPorModelo(modelo);
+        imagemCarroService.remover(carro.getImagem());
         carroRepository.delete(carro);
         logService.registrar("EXCLUIR", ENTIDADE, "Carro excluído: ID " + carro.getId() + ", modelo " + modelo);
         return carro;
@@ -99,6 +149,10 @@ public class CarroService {
     }
 
     public Carro update(Carro c, MultipartFile imagem) {
+        return update(c, imagem, null);
+    }
+
+    public Carro update(Carro c, MultipartFile imagem, Long usuarioId) {
         if (c.getId() == null) {
             throw new CarroException("O ID do carro para atualização não pode ser nulo.");
         }
@@ -106,10 +160,15 @@ public class CarroService {
                 .orElseThrow(() -> new CarroException("Carro com ID " + c.getId() + " não encontrado para atualização."));
         validarModelo(c.getModelo());  // Valida o modelo antes de atualizar
         validarPreco(c.getPreco());
+        Usuario responsavel = usuarioId == null ? existente.getCadastradoPor() : buscarUsuario(usuarioId);
+        String imagemAnterior = existente.getImagem();
         c.setImagem(existente.getImagem());
         salvarImagemSeInformada(c, imagem);
-        c.setCadastradoPor(existente.getCadastradoPor());  // Mantém quem cadastrou o carro
+        c.setCadastradoPor(responsavel);
         Carro atualizado = carroRepository.save(c);  // Retorna o carro salvo para feedback
+        if (!Objects.equals(imagemAnterior, atualizado.getImagem())) {
+            imagemCarroService.remover(imagemAnterior);
+        }
         logService.registrar("ATUALIZAR", ENTIDADE, "Carro atualizado: ID " + atualizado.getId() + ", modelo " + atualizado.getModelo());
         return atualizado;
     }
@@ -118,6 +177,11 @@ public class CarroService {
         if (imagem != null && !imagem.isEmpty()) {
             carro.setImagem(imagemCarroService.salvar(imagem));
         }
+    }
+
+    private Usuario buscarUsuario(Long id) {
+        return usuarioRepository.findById(id)
+                .orElseThrow(() -> new CarroException("Usuário com ID " + id + " não encontrado."));
     }
 
     // Validação do modelo

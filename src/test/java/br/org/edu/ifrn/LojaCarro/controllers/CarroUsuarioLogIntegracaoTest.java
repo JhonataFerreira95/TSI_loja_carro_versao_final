@@ -147,6 +147,75 @@ class CarroUsuarioLogIntegracaoTest {
     }
 
     @Test
+    void usuarioSoPodeEnviarELimparFotosDosPropriosCarrosEAdminPodeDeTodos() throws Exception {
+        String respostaUsuario = mockMvc.perform(post("/usuario/salvar").contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"nome\":\"Joao\",\"email\":\"joao@email.com\",\"senha\":\"123456\"}"))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        var usuario = usuarioRepository.findById(objectMapper.readTree(respostaUsuario).get("id").asLong())
+                .orElseThrow();
+
+        String respostaCarroUsuario = mockMvc.perform(multipart("/carro/salvar").session(sessao)
+                        .param("modelo", "Uno").param("ano", "2021").param("preco", "20000")
+                        .param("usuarioId", usuario.getId().toString()))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        long idCarroDoUsuario = objectMapper.readTree(respostaCarroUsuario).get("id").asLong();
+        long idCarroDoAdmin = salvarCarro("Gol");
+
+        MockHttpSession sessaoUsuario = new MockHttpSession();
+        mockMvc.perform(post("/usuario/login").session(sessaoUsuario).contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"email\":\"joao@email.com\",\"senha\":\"123456\"}"))
+                .andExpect(status().isOk());
+
+        mockMvc.perform(get("/carro/meusCarros").session(sessaoUsuario))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].id").value(idCarroDoUsuario));
+
+        MockMultipartFile imagemUsuario = imagemValida();
+        String respostaImagem = mockMvc.perform(multipart("/carro/" + idCarroDoUsuario + "/imagem")
+                        .file(imagemUsuario).session(sessaoUsuario)
+                        .with(request -> {
+                            request.setMethod("PUT");
+                            return request;
+                        }))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.imagem", startsWith("/uploads/carros/")))
+                .andReturn().getResponse().getContentAsString();
+        String caminhoImagemUsuario = objectMapper.readTree(respostaImagem).get("imagem").asText();
+
+        mockMvc.perform(get(caminhoImagemUsuario).session(sessaoUsuario))
+                .andExpect(status().isOk());
+        mockMvc.perform(multipart("/carro/" + idCarroDoAdmin + "/imagem").file(imagemValida())
+                        .session(sessaoUsuario))
+                .andExpect(status().isForbidden());
+        mockMvc.perform(get("/carro/listarCarros").session(sessaoUsuario))
+                .andExpect(status().isForbidden());
+
+        mockMvc.perform(delete("/carro/" + idCarroDoUsuario + "/imagem").session(sessaoUsuario))
+                .andExpect(status().isNoContent());
+        assertThat(carroRepository.findById(idCarroDoUsuario).orElseThrow().getImagem()).isNull();
+        assertThat(Files.exists(Path.of(diretorioUploads, "carros",
+                caminhoImagemUsuario.substring(caminhoImagemUsuario.lastIndexOf('/') + 1)))).isFalse();
+
+        String respostaImagemAdmin = mockMvc.perform(multipart("/carro/" + idCarroDoAdmin + "/imagem")
+                        .file(imagemValida()).session(sessao)
+                        .with(request -> {
+                            request.setMethod("PUT");
+                            return request;
+                        }))
+                .andExpect(status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        String caminhoImagemAdmin = objectMapper.readTree(respostaImagemAdmin).get("imagem").asText();
+        mockMvc.perform(delete("/carro/" + idCarroDoAdmin + "/imagem").session(sessao))
+                .andExpect(status().isNoContent());
+        assertThat(carroRepository.findById(idCarroDoAdmin).orElseThrow().getImagem()).isNull();
+        assertThat(Files.exists(Path.of(diretorioUploads, "carros",
+                caminhoImagemAdmin.substring(caminhoImagemAdmin.lastIndexOf('/') + 1)))).isFalse();
+    }
+
+    @Test
     void naoExcluiUsuarioComCarrosCadastrados() throws Exception {
         salvarCarro("Gol");
 
@@ -211,5 +280,11 @@ class CarroUsuarioLogIntegracaoTest {
                 .andExpect(status().isForbidden());
         mockMvc.perform(get("/log").session(sessaoJoao))
                 .andExpect(status().isForbidden());
+    }
+
+    private MockMultipartFile imagemValida() {
+        byte[] conteudo = Base64.getDecoder().decode(
+                "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/l9sAAAAASUVORK5CYII=");
+        return new MockMultipartFile("imagem", "carro.png", "image/png", conteudo);
     }
 }

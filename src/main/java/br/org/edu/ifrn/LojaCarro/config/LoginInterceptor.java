@@ -1,7 +1,9 @@
 package br.org.edu.ifrn.LojaCarro.config;
 
+import br.org.edu.ifrn.LojaCarro.model.Carro;
 import br.org.edu.ifrn.LojaCarro.model.PapelUsuario;
 import br.org.edu.ifrn.LojaCarro.model.Usuario;
+import br.org.edu.ifrn.LojaCarro.repository.CarroRepository;
 import br.org.edu.ifrn.LojaCarro.services.LogService;
 import br.org.edu.ifrn.LojaCarro.services.SessaoService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -11,13 +13,20 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 // Bloqueia as rotas do sistema para quem não fez login
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
 
+    private static final Pattern ROTA_IMAGEM_CARRO = Pattern.compile("^/carro/(\\d+)/imagem$");
+
     @Autowired
     private SessaoService sessaoService;
+
+    @Autowired
+    private CarroRepository carroRepository;
 
     @Autowired
     private LogService logService;
@@ -52,9 +61,29 @@ public class LoginInterceptor implements HandlerInterceptor {
             return administrador;
         }
 
+        if ("/carro/meusCarros".equals(caminho) && "GET".equals(metodo)) {
+            return true;
+        }
+
+        Matcher rotaImagem = ROTA_IMAGEM_CARRO.matcher(caminho);
+        if (rotaImagem.matches()) {
+            if (administrador) {
+                return true;
+            }
+            if (!"PUT".equals(metodo) && !"DELETE".equals(metodo)) {
+                return false;
+            }
+            return buscarCarro(rotaImagem.group(1)).map(carro -> pertenceAoUsuario(carro, usuario)).orElse(false);
+        }
+
+        if (caminho.startsWith("/uploads/")) {
+            return administrador || carroRepository.findFirstByImagem(caminho)
+                    .map(carro -> pertenceAoUsuario(carro, usuario)).orElse(false);
+        }
+
         if (caminho.equals("/carro") || caminho.startsWith("/carro/")
                 || caminho.startsWith("/log/") || caminho.equals("/log")
-                || caminho.startsWith("/uploads/") || caminho.equals("/usuario/listarUsuarios")) {
+                || caminho.equals("/usuario/listarUsuarios")) {
             return administrador;
         }
 
@@ -67,6 +96,19 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
 
         return false;
+    }
+
+    private Optional<Carro> buscarCarro(String id) {
+        try {
+            return carroRepository.findById(Long.valueOf(id));
+        } catch (NumberFormatException ex) {
+            return Optional.empty();
+        }
+    }
+
+    private boolean pertenceAoUsuario(Carro carro, Usuario usuario) {
+        return carro.getCadastradoPor() != null
+                && carro.getCadastradoPor().getId().equals(usuario.getId());
     }
 
     private void registrarAcessoNegado(HttpServletRequest request, HttpServletResponse response,

@@ -23,6 +23,9 @@
         <label for="preco">Preço:</label>
         <input type="number" id="preco" step="0.01" min="0" required>
 
+        <label for="usuarioId">Conta associada:</label>
+        <select id="usuarioId"></select>
+
         <label for="imagem">Imagem do computador (opcional):</label>
         <input type="file" id="imagem" accept="image/jpeg,image/png,image/gif,image/webp">
 
@@ -41,7 +44,7 @@
                 <th>Modelo</th>
                 <th>Ano</th>
                 <th>Preço</th>
-                <th>Cadastrado por</th>
+                <th>Conta associada</th>
                 <th>Imagem</th>
                 <th>Ações</th>
             </tr>
@@ -71,6 +74,14 @@
                 adicionarAcoes(linha,
                     function () { editarCarro(c); },
                     function () { excluirCarro(c.id); });
+                if (c.imagem) {
+                    const acao = linha.lastElementChild;
+                    const botaoRemoverImagem = document.createElement("button");
+                    botaoRemoverImagem.textContent = "Remover foto";
+                    botaoRemoverImagem.onclick = function () { removerImagemCarro(c.id); };
+                    acao.appendChild(document.createTextNode(" "));
+                    acao.appendChild(botaoRemoverImagem);
+                }
             });
         }
 
@@ -81,6 +92,7 @@
             dados.append("modelo", document.getElementById("modelo").value);
             dados.append("ano", document.getElementById("ano").value);
             dados.append("preco", document.getElementById("preco").value);
+            dados.append("usuarioId", document.getElementById("usuarioId").value);
             const imagem = document.getElementById("imagem").files[0];
             if (imagem) {
                 dados.append("imagem", imagem);
@@ -105,6 +117,7 @@
             document.getElementById("modelo").value = c.modelo;
             document.getElementById("ano").value = c.ano;
             document.getElementById("preco").value = c.preco;
+            document.getElementById("usuarioId").value = c.cadastradoPor ? c.cadastradoPor.id : "";
             document.getElementById("imagem").value = "";
             document.getElementById("btnSalvar").textContent = "Atualizar";
         }
@@ -122,15 +135,50 @@
             }
         }
 
+        async function removerImagemCarro(id) {
+            if (!confirm("Deseja realmente remover a foto deste carro?")) {
+                return;
+            }
+            const resposta = await api("/carro/" + id + "/imagem", { method: "DELETE" });
+            if (resposta.ok) {
+                mostrarMensagem("Foto removida com sucesso.", false);
+                listarCarros();
+            } else {
+                mostrarMensagem(await lerErro(resposta), true);
+            }
+        }
+
         function limparFormulario() {
             document.getElementById("formCarro").reset();
             document.getElementById("id").value = "";
             document.getElementById("btnSalvar").textContent = "Cadastrar";
         }
 
+        async function listarContasAssociadas(usuarioLogado) {
+            const resposta = await api("/usuario/listarUsuarios");
+            if (!resposta.ok) {
+                mostrarMensagem(await lerErro(resposta), true);
+                return;
+            }
+
+            const contas = await resposta.json();
+            const seletor = document.getElementById("usuarioId");
+            seletor.innerHTML = "";
+            contas.forEach(function (conta) {
+                const opcao = document.createElement("option");
+                opcao.value = conta.id;
+                opcao.textContent = conta.id === usuarioLogado.id
+                    ? conta.nome + " (administrador)"
+                    : conta.nome;
+                seletor.appendChild(opcao);
+            });
+            seletor.value = usuarioLogado.id;
+        }
+
         document.getElementById("formCarro").addEventListener("submit", salvarCarro);
-        montarMenu().then(function (usuario) {
+        montarMenu().then(async function (usuario) {
             if (usuario) {
+                await listarContasAssociadas(usuario);
                 listarCarros();
             }
         });

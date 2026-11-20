@@ -20,8 +20,8 @@ async function montarMenu() {
         '<a href="index.html">Início</a>' +
         (administrador
             ? '<a href="carros.html">Carros</a><a href="usuarios.html">Usuários</a>'
-                + '<a href="logs.html">Logs</a>'
-            : '<a href="usuarios.html">Minha conta</a>') +
+                + '<a href="minhas-fotos.html">Minhas fotos</a><a href="logs.html">Logs</a>'
+            : '<a href="usuarios.html">Minha conta</a><a href="minhas-fotos.html">Minhas fotos</a>') +
         ' | Logado como <b id="nomeLogado"></b> ' +
         '<button type="button" onclick="sair()">Sair</button>';
     document.getElementById("nomeLogado").textContent = usuario.nome;

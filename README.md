@@ -26,8 +26,10 @@ docker compose down
 ## Papéis e permissões
 
 Cada usuário tem um papel persistido na coluna `papel`: `USER` ou `ADMIN`.
-Novas contas sempre começam como `USER`. Usuários comuns só podem consultar e
-atualizar a própria conta; administradores podem gerenciar contas, carros e logs.
+Novas contas sempre começam como `USER`. Usuários comuns podem consultar e
+atualizar a própria conta e gerenciar as fotos dos carros associados à conta;
+administradores podem gerenciar todos os carros, contas e logs e associar carros
+a qualquer conta.
 
 Para conceder o primeiro papel de administrador, crie a conta pela tela de
 cadastro e atualize o papel diretamente no MySQL:

@@ -26,8 +26,9 @@ public class CarroController {
             @RequestParam("modelo") String modelo,
             @RequestParam("ano") int ano,
             @RequestParam("preco") double preco,
-            @RequestParam(value = "imagem", required = false) MultipartFile imagem) {
-        Carro savedCarro = carroService.save(new Carro(modelo, ano, preco), imagem);
+            @RequestParam(value = "imagem", required = false) MultipartFile imagem,
+            @RequestParam(value = "usuarioId", required = false) Long usuarioId) {
+        Carro savedCarro = carroService.save(new Carro(modelo, ano, preco), imagem, usuarioId);
         return ResponseEntity.ok(savedCarro);
     }
 
@@ -38,11 +39,30 @@ public class CarroController {
             @RequestParam("modelo") String modelo,
             @RequestParam("ano") int ano,
             @RequestParam("preco") double preco,
-            @RequestParam(value = "imagem", required = false) MultipartFile imagem) {
+            @RequestParam(value = "imagem", required = false) MultipartFile imagem,
+            @RequestParam(value = "usuarioId", required = false) Long usuarioId) {
         Carro c = new Carro(modelo, ano, preco);
         c.setId(id);  // Define o ID no objeto
-        Carro updatedCarro = carroService.update(c, imagem);
+        Carro updatedCarro = carroService.update(c, imagem, usuarioId);
         return ResponseEntity.ok(updatedCarro);
+    }
+
+    @GetMapping("/meusCarros")
+    public ResponseEntity<List<Carro>> listarMeusCarros() {
+        return ResponseEntity.ok(carroService.findMeusCarros());
+    }
+
+    @PutMapping(value = "/{id}/imagem", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Carro> enviarImagem(
+            @PathVariable Long id,
+            @RequestParam("imagem") MultipartFile imagem) {
+        return ResponseEntity.ok(carroService.atualizarImagem(id, imagem));
+    }
+
+    @DeleteMapping("/{id}/imagem")
+    public ResponseEntity<Void> removerImagem(@PathVariable Long id) {
+        carroService.removerImagem(id);
+        return ResponseEntity.noContent().build();
     }
 
     // Deletar carro (por ID)
