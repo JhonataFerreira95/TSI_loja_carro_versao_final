@@ -206,7 +206,7 @@ class CarroUsuarioLogIntegracaoTest {
         mockMvc.perform(get(caminhoImagemUsuario).session(sessaoUsuario))
                 .andExpect(status().isOk());
         mockMvc.perform(get(caminhoImagemAdmin).session(sessaoUsuario))
-                .andExpect(status().isForbidden());
+                .andExpect(status().isOk());
         mockMvc.perform(multipart("/carro/" + idCarroDoAdmin + "/imagem").file(imagemValida())
                         .session(sessaoUsuario)
                         .with(request -> {
@@ -219,7 +219,7 @@ class CarroUsuarioLogIntegracaoTest {
         mockMvc.perform(delete("/carro/" + idCarroDoUsuario).session(sessaoUsuario))
                         .andExpect(status().isForbidden());
         mockMvc.perform(get("/carro/listarCarros").session(sessaoUsuario))
-                .andExpect(status().isForbidden());
+                .andExpect(status().isOk());
 
         mockMvc.perform(delete("/carro/" + idCarroDoUsuario + "/imagem").session(sessaoUsuario))
                 .andExpect(status().isNoContent());
@@ -272,7 +272,7 @@ class CarroUsuarioLogIntegracaoTest {
                     .andExpect(jsonPath("$[0].id").value(idCarro))
                     .andExpect(jsonPath("$[0].imagem").value(caminhoImagem));
             mockMvc.perform(get("/carro/listarCarros").session(sessaoJoao))
-                    .andExpect(status().isForbidden());
+                    .andExpect(status().isOk());
             mockMvc.perform(delete("/carro/" + idCarro).session(sessaoJoao))
                     .andExpect(status().isForbidden());
             mockMvc.perform(delete("/carro/" + idCarro + "/imagem").session(sessaoJoao))
@@ -327,12 +327,8 @@ class CarroUsuarioLogIntegracaoTest {
     }
 
     @Test
-    void acessoSemLoginFicaRegistradoNoLog() throws Exception {
-        mockMvc.perform(get("/carro/listarCarros")).andExpect(status().isUnauthorized());
-
-        mockMvc.perform(get("/log").session(sessao))
-                .andExpect(jsonPath("$[0].acao").value("ACESSO_NEGADO"))
-                .andExpect(jsonPath("$[0].descricao").value(containsString("/carro/listarCarros")));
+    void listagemPublicaDeCarrosNaoExigeLogin() throws Exception {
+        mockMvc.perform(get("/carro/listarCarros")).andExpect(status().isOk());
     }
 
     @Test
@@ -345,7 +341,7 @@ class CarroUsuarioLogIntegracaoTest {
                 .andExpect(status().isOk());
 
         mockMvc.perform(get("/carro/listarCarros").session(sessaoJoao))
-                .andExpect(status().isForbidden());
+                .andExpect(status().isOk());
         mockMvc.perform(get("/log").session(sessaoJoao))
                 .andExpect(status().isForbidden());
     }

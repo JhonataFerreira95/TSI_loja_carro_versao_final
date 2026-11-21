@@ -1,0 +1,18 @@
+@if (loading) { <div class="loading"></div> }
+@if (erro) { <div class="message error">{{ erro }}</div><a routerLink="/veiculos">Voltar aos veículos</a> }
+@if (carro) {
+  <article class="card detail">
+    @if (carro.imagem) { <img [src]="carro.imagem" [alt]="carro.modelo" /> }
+    @else { <div class="no-image">Sem imagem</div> }
+    <div>
+      <p class="label">VEÍCULO</p>
+      <h1>{{ carro.modelo }}</h1>
+      <p><b>Ano:</b> {{ carro.ano }}</p>
+      <p class="price">{{ carro.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+      <div class="actions">
+        <a class="button" [routerLink]="['/test-drive', carro.id]">Agendar test drive</a>
+        <a class="secondary" routerLink="/veiculos">Voltar</a>
+      </div>
+    </div>
+  </article>
+}

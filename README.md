@@ -1,6 +1,6 @@
 # TSI Loja de Carro
 
-Projeto de loja de carros desenvolvido com Spring Boot, MySQL e Vue 3.
+Projeto de loja de carros desenvolvido com Spring Boot, MySQL e Angular.
 
 ## Requisitos
 
@@ -51,9 +51,9 @@ http://localhost:8080
 
 Para encerrar o backend, use `Ctrl+C` no terminal.
 
-## Executar o front-end integrado
+## Executar o front-end Angular integrado
 
-A maneira mais simples e executar o backend e usar o build Vue integrado ao Spring:
+A maneira mais simples e executar o backend e usar o build Angular integrado ao Spring:
 
 ```powershell
 cd frontend
@@ -71,7 +71,7 @@ Depois, acesse:
 http://localhost:8080
 ```
 
-## Executar Vue e Spring separadamente
+## Executar Angular e Spring separadamente
 
 Use esta opcao para editar o front-end com recarregamento automatico.
 
@@ -84,18 +84,18 @@ $env:SERVER = "dev"
 .\mvnw.cmd spring-boot:run
 ```
 
-### Terminal 2 - front-end Vue
+### Terminal 2 - front-end Angular
 
 ```powershell
 cd frontend
 npm install
-npm run dev
+npm start
 ```
 
-O Vite informara o endereco local, normalmente:
+O Angular informara o endereco local, normalmente:
 
 ```text
-http://localhost:5173
+http://localhost:4200
 ```
 
 As chamadas `/usuario`, `/carro`, `/log` e `/uploads` serao encaminhadas automaticamente para o Spring em `http://localhost:8080`.

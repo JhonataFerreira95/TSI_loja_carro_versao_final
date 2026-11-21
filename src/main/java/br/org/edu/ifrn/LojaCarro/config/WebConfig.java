@@ -21,7 +21,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
-                .addPathPatterns("/carro/**", "/usuario/**", "/log/**", "/uploads/**")
+                .addPathPatterns("/carro/**", "/usuario/**", "/agendamento/**", "/agendamento", "/log/**", "/uploads/**")
                 // Login, logout e consulta da própria sessão não exigem autorização prévia.
                 .excludePathPatterns("/usuario/login", "/usuario/logout", "/usuario/logado");
     }

@@ -27,6 +27,11 @@ public class GlobalExceptionHandler {
         return erro("Usuario", ex.getMessage());
     }
 
+    @ExceptionHandler({IllegalArgumentException.class, IllegalStateException.class})
+    public ResponseEntity<Map<String, String>> handleRequestException(RuntimeException ex) {
+        return erro("Sistema", ex.getMessage());
+    }
+
     private ResponseEntity<Map<String, String>> erro(String entidade, String mensagem) {
         logService.registrar("ERRO", entidade, mensagem);
         Map<String, String> body = new HashMap<>();

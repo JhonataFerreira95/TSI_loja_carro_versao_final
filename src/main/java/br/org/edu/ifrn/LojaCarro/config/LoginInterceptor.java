@@ -40,6 +40,11 @@ public class LoginInterceptor implements HandlerInterceptor {
             if ("/usuario/salvar".equals(caminho) && "POST".equals(request.getMethod())) {
                 return true;
             }
+            if ("GET".equals(request.getMethod()) && ("/carro/listarCarros".equals(caminho)
+                    || caminho.matches("/carro/\\d+")
+                    || caminho.startsWith("/uploads/"))) {
+                return true;
+            }
             registrarAcessoNegado(request, response, HttpServletResponse.SC_UNAUTHORIZED,
                     "É necessário fazer login.");
             return false;
@@ -57,7 +62,25 @@ public class LoginInterceptor implements HandlerInterceptor {
     private boolean temPermissao(Usuario usuario, String caminho, String metodo) {
         boolean administrador = usuario.getPapel() == PapelUsuario.ADMIN;
 
+        if ("GET".equals(metodo) && ("/carro/listarCarros".equals(caminho)
+                || caminho.matches("/carro/\\d+")
+                || caminho.startsWith("/uploads/"))) {
+            return true;
+        }
+
         if ("/usuario/salvar".equals(caminho) && "POST".equals(metodo)) {
+            return administrador;
+        }
+
+        if ("/agendamento/meus".equals(caminho) && "GET".equals(metodo)) {
+            return true;
+        }
+
+        if ("/agendamento".equals(caminho) && "POST".equals(metodo)) {
+            return true;
+        }
+
+        if (caminho.startsWith("/agendamento")) {
             return administrador;
         }
 

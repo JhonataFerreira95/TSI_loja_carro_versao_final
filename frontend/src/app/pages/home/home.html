@@ -1,0 +1,26 @@
+<section class="hero card">
+  <div>
+    <p class="eyebrow">ENCONTRE O SEU PRÓXIMO CARRO</p>
+    <h1>Mobilidade, escolha e confiança em um só lugar.</h1>
+    <p>Explore veículos disponíveis e agende um test drive com facilidade.</p>
+    <a class="cta" routerLink="/veiculos">Ver veículos</a>
+  </div>
+</section>
+
+<section>
+  <h2>Destaques</h2>
+  @if (loading) { <div class="loading"></div> }
+  @if (!loading && carros.length) {
+    <div class="grid grid-cards">
+      @for (carro of carros; track carro.id) {
+        <article class="card vehicle-card">
+          @if (carro.imagem) { <img [src]="carro.imagem" [alt]="carro.modelo" /> }
+          @else { <div class="no-image">Sem imagem</div> }
+          <h3>{{ carro.modelo }}</h3>
+          <p>{{ carro.ano }} · {{ carro.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+          <a [routerLink]="['/veiculos', carro.id]">Ver detalhes</a>
+        </article>
+      }
+    </div>
+  }
+</section>

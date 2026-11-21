@@ -1,0 +1,20 @@
+<section class="card">
+  <h1>Agendar test drive</h1>
+  @if (carro) {
+    <p>Veículo selecionado: <b>{{ carro.modelo }}</b></p>
+  }
+  @if (mensagem) { <div class="message" [class.error]="erro" [class.success]="!erro">{{ mensagem }}</div> }
+  <form [formGroup]="form" (ngSubmit)="agendar()">
+    <label class="field">Data e horário
+      <input type="datetime-local" formControlName="dataHora" />
+      @if (form.controls['dataHora'].touched && form.controls['dataHora'].invalid) { <small class="field-error">Selecione uma data e horário.</small> }
+    </label>
+    <label class="field">Observações
+      <textarea rows="4" formControlName="observacao"></textarea>
+    </label>
+    <div class="actions">
+      <button type="submit" [disabled]="loading || form.invalid">{{ loading ? 'Agendando...' : 'Confirmar agendamento' }}</button>
+      <a class="secondary" routerLink="/meus-agendamentos">Meus agendamentos</a>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,16 @@
+<section class="card auth-card">
+  <h1>Entrar</h1>
+  @if (mensagem) { <div class="message" [class.error]="erro" [class.success]="!erro">{{ mensagem }}</div> }
+  <form [formGroup]="form" (ngSubmit)="entrar()">
+    <label class="field">E-mail
+      <input type="email" formControlName="email" />
+      @if (form.controls['email'].touched && form.controls['email'].invalid) { <small class="field-error">Informe um e-mail válido.</small> }
+    </label>
+    <label class="field">Senha
+      <input type="password" formControlName="senha" />
+      @if (form.controls['senha'].touched && form.controls['senha'].invalid) { <small class="field-error">Informe a senha.</small> }
+    </label>
+    <button type="submit" [disabled]="loading || form.invalid">{{ loading ? 'Entrando...' : 'Entrar' }}</button>
+  </form>
+  <p>Não possui conta? <a routerLink="/cadastro">Criar conta</a></p>
+</section>

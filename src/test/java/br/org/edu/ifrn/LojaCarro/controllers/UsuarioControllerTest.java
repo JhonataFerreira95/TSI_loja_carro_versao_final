@@ -120,7 +120,7 @@ class UsuarioControllerTest {
                 .andExpect(status().isForbidden());
         mockMvc.perform(get("/usuario/listarUsuarios").session(sessao)).andExpect(status().isForbidden());
         mockMvc.perform(get("/log").session(sessao)).andExpect(status().isForbidden());
-        mockMvc.perform(get("/carro/listarCarros").session(sessao)).andExpect(status().isForbidden());
+        mockMvc.perform(get("/carro/listarCarros").session(sessao)).andExpect(status().isOk());
         mockMvc.perform(post("/usuario/salvar").session(sessao).contentType(MediaType.APPLICATION_JSON)
                 .content("{\"nome\":\"Outra\",\"email\":\"outra@email.com\",\"senha\":\"123456\"}"))
                 .andExpect(status().isForbidden());
@@ -149,7 +149,7 @@ class UsuarioControllerTest {
     @Test
     void exigeLoginParaAcessarOSistema() throws Exception {
         mockMvc.perform(get("/usuario/listarUsuarios")).andExpect(status().isUnauthorized());
-        mockMvc.perform(get("/carro/listarCarros")).andExpect(status().isUnauthorized());
+        mockMvc.perform(get("/carro/listarCarros")).andExpect(status().isOk());
         mockMvc.perform(get("/log")).andExpect(status().isUnauthorized());
         mockMvc.perform(get("/usuario/logado")).andExpect(status().isUnauthorized());
     }

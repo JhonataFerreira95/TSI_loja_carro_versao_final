@@ -1,0 +1,19 @@
+<h1>Veículos disponíveis</h1>
+<label class="field">Buscar por modelo
+  <input [(ngModel)]="filtro" placeholder="Ex.: Sedan" />
+</label>
+@if (loading) { <div class="loading"></div> }
+@if (erro) { <div class="message error">{{ erro }}</div> }
+@if (!loading) {
+  <div class="grid grid-cards">
+    @for (carro of filtrados; track carro.id) {
+      <article class="card">
+        @if (carro.imagem) { <img [src]="carro.imagem" [alt]="carro.modelo" /> }
+        @else { <div class="no-image">Sem imagem</div> }
+        <h2>{{ carro.modelo }}</h2>
+        <p>{{ carro.ano }} · {{ carro.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
+        <a [routerLink]="['/veiculos', carro.id]">Ver detalhes</a>
+      </article>
+    }
+  </div>
+}

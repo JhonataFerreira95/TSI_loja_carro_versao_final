@@ -1,0 +1,21 @@
+<h1>Meus agendamentos</h1>
+@if (loading) { <div class="loading"></div> }
+@if (erro) { <div class="message error">{{ erro }}</div> }
+@if (!loading && !agendamentos.length) { <div class="card">Nenhum agendamento encontrado.</div> }
+<div class="table-wrap">
+  @if (agendamentos.length) {
+    <table>
+      <thead><tr><th>Veículo</th><th>Data/hora</th><th>Status</th><th>Observação</th></tr></thead>
+      <tbody>
+        @for (item of agendamentos; track item.id) {
+          <tr>
+            <td>{{ item.carro?.modelo }}</td>
+            <td>{{ item.dataHora | date:'dd/MM/yyyy HH:mm' }}</td>
+            <td>{{ item.status }}</td>
+            <td>{{ item.observacao || '-' }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>

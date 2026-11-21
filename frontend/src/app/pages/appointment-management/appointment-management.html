@@ -1,0 +1,24 @@
+<h1>Gerenciamento de agendamentos</h1>
+@if (mensagem) { <div class="message" [class.error]="erro" [class.success]="!erro">{{ mensagem }}</div> }
+@if (loading) { <div class="loading"></div> }
+<div class="table-wrap">
+  <table>
+    <thead><tr><th>ID</th><th>Cliente</th><th>Veículo</th><th>Data/hora</th><th>Status</th><th>Ações</th></tr></thead>
+    <tbody>
+      @for (item of agendamentos; track item.id) {
+        <tr>
+          <td>{{ item.id }}</td><td>{{ item.cliente?.nome }}</td><td>{{ item.carro?.modelo }}</td>
+          <td>{{ item.dataHora | date:'dd/MM/yyyy HH:mm' }}</td><td>{{ item.status }}</td>
+          <td>
+            <select [value]="item.status" (change)="alterar(item, $any($event.target).value)">
+              <option value="PENDENTE">Pendente</option>
+              <option value="CONFIRMADO">Confirmado</option>
+              <option value="CANCELADO">Cancelado</option>
+              <option value="CONCLUIDO">Concluído</option>
+            </select>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

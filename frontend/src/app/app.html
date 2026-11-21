@@ -1,0 +1,24 @@
+<header class="topbar">
+  <a class="brand" routerLink="/">Loja de Carros</a>
+  <button class="menu-toggle" type="button" aria-label="Abrir menu" (click)="menuAberto = !menuAberto">☰</button>
+  <nav [class.aberto]="menuAberto">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Início</a>
+    <a routerLink="/veiculos" routerLinkActive="active">Veículos</a>
+    @if (api.usuario()) {
+      <a routerLink="/meus-agendamentos" routerLinkActive="active">Meus agendamentos</a>
+    }
+    @if (api.usuario()?.papel === 'ADMIN') {
+      <a routerLink="/admin" routerLinkActive="active">Painel admin</a>
+    }
+    @if (!api.usuario()) {
+      <a routerLink="/login" routerLinkActive="active">Entrar</a>
+      <a class="nav-button" routerLink="/cadastro">Cadastrar</a>
+    } @else {
+      <span class="user-name">{{ api.usuario()?.nome }}</span>
+      <button type="button" class="link-button" (click)="sair()">Sair</button>
+    }
+  </nav>
+</header>
+<main class="app-content">
+  <router-outlet />
+</main>

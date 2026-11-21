@@ -1,0 +1,3 @@
+.management-grid { grid-template-columns:minmax(260px,360px) 1fr; }
+form.card { display:grid; gap:12px; }
+@media(max-width:900px){.management-grid{grid-template-columns:1fr}}

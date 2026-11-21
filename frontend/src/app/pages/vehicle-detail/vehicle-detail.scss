@@ -1,0 +1,8 @@
+.detail { display:grid; grid-template-columns:minmax(280px,1.2fr) 1fr; gap:28px; }
+.detail img,.no-image { width:100%; height:420px; object-fit:cover; }
+.no-image { display:grid; place-items:center; background:#edf1f5; }
+.label { color:#1f7a54 !important; font-weight:800; }
+.price { font-size:2rem; font-weight:900; }
+.button,.secondary { padding:10px 14px; border-radius:8px; text-decoration:none; color:#fff; background:#1f7a54; }
+.secondary { background:#e7edf3; color:#17202a; }
+@media(max-width:760px){.detail{grid-template-columns:1fr}.detail img,.no-image{height:260px}}
