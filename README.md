@@ -23,6 +23,28 @@ Para parar o MySQL sem apagar os dados:
 docker compose down
 ```
 
+## Front-end Vue
+
+O front-end está em [frontend/](frontend/) e usa Vue 3 com Vue Router.
+
+Para alterar e executar a interface em modo de desenvolvimento:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Para gerar a versão de produção dentro de `src/main/resources/static`:
+
+```bash
+cd frontend
+npm run build
+```
+
+O build gera uma SPA única consumida pelo Spring Boot, mantendo os serviços REST
+sob os mesmos caminhos já utilizados pelo projeto.
+
 ## Papéis e permissões
 
 Cada usuário tem um papel persistido na coluna `papel`: `USER` ou `ADMIN`.
