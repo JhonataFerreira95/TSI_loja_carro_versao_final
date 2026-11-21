@@ -1,49 +1,115 @@
-# TSI_loja_carro_versao_final
+# TSI Loja de Carro
 
-## Executar localmente
+Projeto de loja de carros desenvolvido com Spring Boot, MySQL e Vue 3.
 
-Requisitos: Java 25 LTS e Maven 3.9.15+ (ou use `mvnw`/`mvnw.cmd`).
+## Requisitos
 
-Inicie o MySQL de desenvolvimento (Docker Compose cria o banco `carros`):
+- Windows
+- Java 25
+- Maven 3.9+ ou o Maven Wrapper incluido no projeto
+- Node.js 20+ e npm
+- MySQL 8 executando localmente
 
-```bash
-docker compose up -d --wait mysql
+Este projeto pode ser executado sem Docker.
+
+## Banco de dados MySQL local
+
+Crie o banco utilizado pelo perfil de desenvolvimento:
+
+```sql
+CREATE DATABASE carros CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-Inicie o backend usando o perfil `dev`:
+O projeto espera estas configuracoes no perfil `dev`:
 
-```bash
-SERVER=dev mvn spring-boot:run
+- Host: `localhost`
+- Porta: `3306`
+- Banco: `carros`
+- Usuario: `root`
+- Senha: `root`
+
+As configuracoes podem ser alteradas em:
+
+[application-dev.properties](src/main/resources/application-dev.properties)
+
+As tabelas sao criadas ou atualizadas automaticamente pelo Hibernate.
+
+## Executar o backend
+
+Na raiz do projeto, execute no PowerShell:
+
+```powershell
+$env:SERVER = "dev"
+.\mvnw.cmd spring-boot:run
 ```
 
-O perfil local usa `root/root`; essas credenciais são somente para desenvolvimento.
-Para parar o MySQL sem apagar os dados:
+O backend sera iniciado em:
 
-```bash
-docker compose down
+```text
+http://localhost:8080
 ```
 
-## Front-end Vue
+Para encerrar o backend, use `Ctrl+C` no terminal.
 
-O front-end está em [frontend/](frontend/) e usa Vue 3 com Vue Router.
+## Executar o front-end integrado
 
-Para alterar e executar a interface em modo de desenvolvimento:
+A maneira mais simples e executar o backend e usar o build Vue integrado ao Spring:
 
-```bash
+```powershell
+cd frontend
+npm install
+npm run build
+cd ..
+
+$env:SERVER = "dev"
+.\mvnw.cmd spring-boot:run
+```
+
+Depois, acesse:
+
+```text
+http://localhost:8080
+```
+
+## Executar Vue e Spring separadamente
+
+Use esta opcao para editar o front-end com recarregamento automatico.
+
+### Terminal 1 - backend
+
+Na raiz do projeto:
+
+```powershell
+$env:SERVER = "dev"
+.\mvnw.cmd spring-boot:run
+```
+
+### Terminal 2 - front-end Vue
+
+```powershell
 cd frontend
 npm install
 npm run dev
 ```
 
-Para gerar a versão de produção dentro de `src/main/resources/static`:
+O Vite informara o endereco local, normalmente:
 
-```bash
+```text
+http://localhost:5173
+```
+
+As chamadas `/usuario`, `/carro`, `/log` e `/uploads` serao encaminhadas automaticamente para o Spring em `http://localhost:8080`.
+
+## Gerar somente o front-end de producao
+
+```powershell
 cd frontend
 npm run build
 ```
 
-O build gera uma SPA única consumida pelo Spring Boot, mantendo os serviços REST
-sob os mesmos caminhos já utilizados pelo projeto.
+Os arquivos serao gerados em:
+
+[src/main/resources/static](src/main/resources/static)
 
 ## Papéis e permissões
 
@@ -68,4 +134,4 @@ Depois de promover a conta, faça login como esse usuário e recarregue a págin
 No cadastro, selecione uma imagem JPEG, PNG, GIF ou WebP de até 5 MB do computador.
 O arquivo é salvo localmente em `uploads/carros/`; o banco guarda apenas o caminho
 da imagem. A pasta pode ser alterada pela variável `UPLOADS_DIR`. Em produção ou
-com Docker, mantenha essa pasta em um volume persistente.
+ao executar em outro ambiente, mantenha essa pasta em armazenamento persistente.
