@@ -100,6 +100,14 @@ class CarroUsuarioLogIntegracaoTest {
     }
 
     @Test
+    void aceitaNomeDeModeloComMaisDeCincoCaracteres() throws Exception {
+        mockMvc.perform(multipart("/carro/salvar").session(sessao)
+                        .param("modelo", "Corolla Cross").param("ano", "2024").param("preco", "150000"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.modelo").value("Corolla Cross"));
+    }
+
+    @Test
     void uploadSalvaArquivoLocalEArmazenaApenasOCaminhoNoCarro() throws Exception {
         byte[] conteudo = Base64.getDecoder().decode(
                 "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/l9sAAAAASUVORK5CYII=");
@@ -300,7 +308,7 @@ class CarroUsuarioLogIntegracaoTest {
     void logsRegistramQuemFezCadaAcao() throws Exception {
         salvarCarro("Gol");
         mockMvc.perform(multipart("/carro/salvar").session(sessao)
-                        .param("modelo", "Modelo Grande").param("ano", "2020").param("preco", "1"))
+                        .param("modelo", "Modelo Grande").param("ano", "2020").param("preco", "-1"))
                 .andExpect(status().isBadRequest());
 
         // Logs vêm do mais recente para o mais antigo
