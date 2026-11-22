@@ -19,13 +19,24 @@ public class Agendamento {
     @Column(nullable = false)
     private LocalDateTime dataHora;
 
+    @Column(updatable = false)
+    private LocalDateTime dataCriacao;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private StatusAgendamento status = StatusAgendamento.PENDENTE;
+    private StatusAgendamento status = StatusAgendamento.CONFIRMADO;
 
+    @Column(length = 500)
     private String observacao;
 
     public Agendamento() {}
+
+    @PrePersist
+    void registrarCriacao() {
+        if (dataCriacao == null) {
+            dataCriacao = LocalDateTime.now();
+        }
+    }
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -35,6 +46,7 @@ public class Agendamento {
     public void setCliente(Usuario cliente) { this.cliente = cliente; }
     public LocalDateTime getDataHora() { return dataHora; }
     public void setDataHora(LocalDateTime dataHora) { this.dataHora = dataHora; }
+    public LocalDateTime getDataCriacao() { return dataCriacao; }
     public StatusAgendamento getStatus() { return status; }
     public void setStatus(StatusAgendamento status) { this.status = status; }
     public String getObservacao() { return observacao; }

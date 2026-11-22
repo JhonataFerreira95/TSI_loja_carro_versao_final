@@ -14,6 +14,10 @@ public class Carro {
     double preco;
     private String imagem;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20, columnDefinition = "varchar(20) default 'DISPONIVEL'")
+    private StatusCarro status = StatusCarro.DISPONIVEL;
+
     // Usuário que cadastrou o carro
     @ManyToOne
     @JoinColumn(name = "usuario_id")
@@ -74,6 +78,14 @@ public class Carro {
 
     public void setImagem(String imagem) {
         this.imagem = imagem;
+    }
+
+    public StatusCarro getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusCarro status) {
+        this.status = status;
     }
 
     public Usuario getCadastradoPor() {

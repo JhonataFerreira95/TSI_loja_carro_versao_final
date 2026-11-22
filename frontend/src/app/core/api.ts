@@ -14,6 +14,7 @@ export interface Carro {
   modelo: string;
   ano: number;
   preco: number;
+  status: 'DISPONIVEL' | 'VENDIDO' | 'INATIVO';
   imagem?: string;
   cadastradoPor?: Usuario;
 }
@@ -23,7 +24,8 @@ export interface Agendamento {
   carro: Carro;
   cliente: Usuario;
   dataHora: string;
-  status: 'PENDENTE' | 'CONFIRMADO' | 'CANCELADO' | 'CONCLUIDO';
+  dataCriacao: string;
+  status: 'PENDENTE' | 'CONFIRMADO' | 'CANCELADO' | 'REALIZADO' | 'CONCLUIDO';
   observacao?: string;
 }
 
@@ -80,8 +82,24 @@ export class Api {
     return this.http.post<Agendamento>('/agendamento', dados);
   }
   meusAgendamentos() { return this.http.get<Agendamento[]>('/agendamento/meus'); }
-  listarAgendamentos() { return this.http.get<Agendamento[]>('/agendamento'); }
+  horariosDisponiveis(carroId: number, data: string) {
+    return this.http.get<string[]>(`/agendamento/disponibilidade?carroId=${carroId}&data=${data}`);
+  }
+  cancelarAgendamento(id: number) {
+    return this.http.put<Agendamento>(`/agendamento/${id}/cancelar`, {});
+  }
+  listarAgendamentos(filtros: { data?: string; carroId?: number } = {}) {
+    const parametros = new URLSearchParams();
+    if (filtros.data) parametros.set('data', filtros.data);
+    if (filtros.carroId) parametros.set('carroId', String(filtros.carroId));
+    const queryString = parametros.toString();
+    const query = queryString ? `?${queryString}` : '';
+    return this.http.get<Agendamento[]>(`/agendamento${query}`);
+  }
   alterarStatus(id: number, status: string) {
     return this.http.put<Agendamento>(`/agendamento/${id}/status?status=${status}`, {});
+  }
+  alterarStatusCarro(id: number, status: Carro['status']) {
+    return this.http.put<Carro>(`/carro/${id}/status?status=${status}`, {});
   }
 }

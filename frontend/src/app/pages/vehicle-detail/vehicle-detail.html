@@ -10,7 +10,11 @@
       <p><b>Ano:</b> {{ carro.ano }}</p>
       <p class="price">{{ carro.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</p>
       <div class="actions">
-        <a class="button" [routerLink]="['/test-drive', carro.id]">Agendar test drive</a>
+        @if (carro.status === 'DISPONIVEL') {
+          <a class="button" [routerLink]="['/test-drive', carro.id]">Agendar test drive</a>
+        } @else {
+          <span class="secondary">Veículo indisponível para test drive</span>
+        }
         <a class="secondary" routerLink="/veiculos">Voltar</a>
       </div>
     </div>

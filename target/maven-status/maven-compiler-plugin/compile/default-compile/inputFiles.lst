@@ -1,3 +1,4 @@
+C:\Users\Bass\Downloads\TSI_loja_carro_versao_final\src\main\java\br\org\edu\ifrn\LojaCarro\AgendamentoConflitoException.java
 C:\Users\Bass\Downloads\TSI_loja_carro_versao_final\src\main\java\br\org\edu\ifrn\LojaCarro\CarroException.java
 C:\Users\Bass\Downloads\TSI_loja_carro_versao_final\src\main\java\br\org\edu\ifrn\LojaCarro\config\LoginInterceptor.java
 C:\Users\Bass\Downloads\TSI_loja_carro_versao_final\src\main\java\br\org\edu\ifrn\LojaCarro\config\WebConfig.java
@@ -12,6 +13,7 @@ C:\Users\Bass\Downloads\TSI_loja_carro_versao_final\src\main\java\br\org\edu\ifr
 C:\Users\Bass\Downloads\TSI_loja_carro_versao_final\src\main\java\br\org\edu\ifrn\LojaCarro\model\LogSistema.java
 C:\Users\Bass\Downloads\TSI_loja_carro_versao_final\src\main\java\br\org\edu\ifrn\LojaCarro\model\PapelUsuario.java
 C:\Users\Bass\Downloads\TSI_loja_carro_versao_final\src\main\java\br\org\edu\ifrn\LojaCarro\model\StatusAgendamento.java
+C:\Users\Bass\Downloads\TSI_loja_carro_versao_final\src\main\java\br\org\edu\ifrn\LojaCarro\model\StatusCarro.java
 C:\Users\Bass\Downloads\TSI_loja_carro_versao_final\src\main\java\br\org\edu\ifrn\LojaCarro\model\Usuario.java
 C:\Users\Bass\Downloads\TSI_loja_carro_versao_final\src\main\java\br\org\edu\ifrn\LojaCarro\repository\AgendamentoRepository.java
 C:\Users\Bass\Downloads\TSI_loja_carro_versao_final\src\main\java\br\org\edu\ifrn\LojaCarro\repository\CarroRepository.java

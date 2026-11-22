@@ -3,6 +3,7 @@ package br.org.edu.ifrn.LojaCarro.controllers;
 
 import br.org.edu.ifrn.LojaCarro.CarroException;
 import br.org.edu.ifrn.LojaCarro.model.Carro;
+import br.org.edu.ifrn.LojaCarro.model.StatusCarro;
 import br.org.edu.ifrn.LojaCarro.services.CarroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -63,6 +64,11 @@ public class CarroController {
     public ResponseEntity<Void> removerImagem(@PathVariable Long id) {
         carroService.removerImagem(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<Carro> alterarStatus(@PathVariable Long id, @RequestParam StatusCarro status) {
+        return ResponseEntity.ok(carroService.alterarStatus(id, status));
     }
 
     // Deletar carro (por ID)

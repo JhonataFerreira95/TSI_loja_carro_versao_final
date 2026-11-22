@@ -2,18 +2,39 @@
   <h1>Agendar test drive</h1>
   @if (carro) {
     <p>Veículo selecionado: <b>{{ carro.modelo }}</b></p>
+    @if (carro.status !== 'DISPONIVEL') {
+      <div class="message error">Este veículo não está disponível para test drive.</div>
+    }
   }
   @if (mensagem) { <div class="message" [class.error]="erro" [class.success]="!erro">{{ mensagem }}</div> }
   <form [formGroup]="form" (ngSubmit)="agendar()">
-    <label class="field">Data e horário
-      <input type="datetime-local" formControlName="dataHora" />
-      @if (form.controls['dataHora'].touched && form.controls['dataHora'].invalid) { <small class="field-error">Selecione uma data e horário.</small> }
+    <label class="field">Data
+      <input type="date" formControlName="data" [min]="dataMinima" (change)="carregarDisponibilidade()" />
+      @if (form.controls['data'].touched && form.controls['data'].invalid) { <small class="field-error">Selecione uma data.</small> }
     </label>
+    <fieldset class="slot-picker" [disabled]="!carro || carro.status !== 'DISPONIVEL'">
+      <legend>Horários disponíveis (30 minutos)</legend>
+      @if (carregandoHorarios) { <p>Consultando horários...</p> }
+      @else if (horarios.length) {
+        <div class="slots">
+          @for (horario of horarios; track horario) {
+            <button type="button" class="slot" [class.selected]="horarioSelecionado === horario"
+              [attr.aria-pressed]="horarioSelecionado === horario" (click)="horarioSelecionado = horario">
+              {{ horario.slice(0, 5) }}
+            </button>
+          }
+        </div>
+      } @else {
+        <p>Não há horários disponíveis para esta data.</p>
+      }
+    </fieldset>
     <label class="field">Observações
       <textarea rows="4" formControlName="observacao"></textarea>
     </label>
     <div class="actions">
-      <button type="submit" [disabled]="loading || form.invalid">{{ loading ? 'Agendando...' : 'Confirmar agendamento' }}</button>
+      <button type="submit" [disabled]="loading || form.invalid || !horarioSelecionado || carro?.status !== 'DISPONIVEL'">
+        {{ loading ? 'Agendando...' : 'Confirmar agendamento' }}
+      </button>
       <a class="secondary" routerLink="/meus-agendamentos">Meus agendamentos</a>
     </div>
   </form>

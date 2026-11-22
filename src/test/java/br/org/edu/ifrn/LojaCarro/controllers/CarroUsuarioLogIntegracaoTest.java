@@ -1,6 +1,7 @@
 package br.org.edu.ifrn.LojaCarro.controllers;
 
 import br.org.edu.ifrn.LojaCarro.model.PapelUsuario;
+import br.org.edu.ifrn.LojaCarro.repository.AgendamentoRepository;
 import br.org.edu.ifrn.LojaCarro.repository.CarroRepository;
 import br.org.edu.ifrn.LojaCarro.repository.LogRepository;
 import br.org.edu.ifrn.LojaCarro.repository.UsuarioRepository;
@@ -37,6 +38,9 @@ class CarroUsuarioLogIntegracaoTest {
     private CarroRepository carroRepository;
 
     @Autowired
+    private AgendamentoRepository agendamentoRepository;
+
+    @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Autowired
@@ -53,6 +57,7 @@ class CarroUsuarioLogIntegracaoTest {
 
     @BeforeEach
     void prepararUsuarioLogado() throws Exception {
+        agendamentoRepository.deleteAll();
         carroRepository.deleteAll();
         usuarioRepository.deleteAll();
         logRepository.deleteAll();

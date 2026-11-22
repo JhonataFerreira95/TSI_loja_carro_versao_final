@@ -1,20 +1,38 @@
 <h1>Gerenciamento de agendamentos</h1>
 @if (mensagem) { <div class="message" [class.error]="erro" [class.success]="!erro">{{ mensagem }}</div> }
 @if (loading) { <div class="loading"></div> }
+<section class="filters card">
+  <label class="field">Data
+    <input type="date" [(ngModel)]="dataFiltro" (change)="listar()" />
+  </label>
+  <label class="field">Veículo
+    <select [(ngModel)]="carroFiltro" (change)="listar()">
+      <option value="">Todos os veículos</option>
+      @for (carro of carros; track carro.id) {
+        <option [value]="carro.id">{{ carro.modelo }}</option>
+      }
+    </select>
+  </label>
+  <button type="button" class="secondary" (click)="dataFiltro = ''; carroFiltro = ''; listar()">Limpar filtros</button>
+</section>
 <div class="table-wrap">
   <table>
-    <thead><tr><th>ID</th><th>Cliente</th><th>Veículo</th><th>Data/hora</th><th>Status</th><th>Ações</th></tr></thead>
+    <thead><tr><th>ID</th><th>Cliente</th><th>Veículo</th><th>Data do test drive</th><th>Horário</th><th>Situação</th><th>Ações</th></tr></thead>
     <tbody>
       @for (item of agendamentos; track item.id) {
         <tr>
-          <td>{{ item.id }}</td><td>{{ item.cliente?.nome }}</td><td>{{ item.carro?.modelo }}</td>
-          <td>{{ item.dataHora | date:'dd/MM/yyyy HH:mm' }}</td><td>{{ item.status }}</td>
+          <td>{{ item.id }}</td><td>{{ item.cliente.nome }}</td><td>{{ item.carro.modelo }}</td>
+          <td>{{ item.dataHora | date:'dd/MM/yyyy' }}</td>
+          <td>{{ item.dataHora | date:'HH:mm' }}</td>
+          <td>{{ statusLabel(item.status) }}</td>
           <td>
             <select [value]="item.status" (change)="alterar(item, $any($event.target).value)">
-              <option value="PENDENTE">Pendente</option>
               <option value="CONFIRMADO">Confirmado</option>
               <option value="CANCELADO">Cancelado</option>
-              <option value="CONCLUIDO">Concluído</option>
+              <option value="REALIZADO">Realizado</option>
+              @if (item.status === 'PENDENTE' || item.status === 'CONCLUIDO') {
+                <option [value]="item.status">{{ statusLabel(item.status) }}</option>
+              }
             </select>
           </td>
         </tr>

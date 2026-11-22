@@ -76,6 +76,14 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
 
+        if ("/agendamento/disponibilidade".equals(caminho) && "GET".equals(metodo)) {
+            return true;
+        }
+
+        if (caminho.matches("/agendamento/\\d+/cancelar") && "PUT".equals(metodo)) {
+            return true;
+        }
+
         if ("/agendamento".equals(caminho) && "POST".equals(metodo)) {
             return true;
         }

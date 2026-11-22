@@ -22,12 +22,19 @@
     @if (loading) { <div class="loading"></div> }
     <div class="table-wrap">
       <table>
-        <thead><tr><th>ID</th><th>Modelo</th><th>Ano</th><th>Preço</th><th>Ações</th></tr></thead>
+        <thead><tr><th>ID</th><th>Modelo</th><th>Ano</th><th>Preço</th><th>Situação</th><th>Ações</th></tr></thead>
         <tbody>
           @for (carro of carros; track carro.id) {
             <tr>
               <td>{{ carro.id }}</td><td>{{ carro.modelo }}</td><td>{{ carro.ano }}</td>
               <td>{{ carro.preco | currency:'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+              <td>
+                <select [value]="carro.status" (change)="alterarStatus(carro, $any($event.target).value)">
+                  <option value="DISPONIVEL">Disponível</option>
+                  <option value="VENDIDO">Vendido</option>
+                  <option value="INATIVO">Inativo</option>
+                </select>
+              </td>
               <td><div class="actions">
                 <button type="button" (click)="editar(carro)">Editar</button>
                 <button type="button" class="danger" (click)="excluir(carro.id)">Excluir</button>

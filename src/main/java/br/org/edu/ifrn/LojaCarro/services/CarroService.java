@@ -3,11 +3,13 @@ package br.org.edu.ifrn.LojaCarro.services;
 import br.org.edu.ifrn.LojaCarro.CarroException;
 import br.org.edu.ifrn.LojaCarro.model.Carro;
 import br.org.edu.ifrn.LojaCarro.model.PapelUsuario;
+import br.org.edu.ifrn.LojaCarro.model.StatusCarro;
 import br.org.edu.ifrn.LojaCarro.model.Usuario;
 import br.org.edu.ifrn.LojaCarro.repository.CarroRepository;
 import br.org.edu.ifrn.LojaCarro.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
@@ -171,11 +173,26 @@ public class CarroService {
         c.setImagem(existente.getImagem());
         salvarImagemSeInformada(c, imagem);
         c.setCadastradoPor(responsavel);
+        c.setStatus(existente.getStatus());
         Carro atualizado = carroRepository.save(c);  // Retorna o carro salvo para feedback
         if (!Objects.equals(imagemAnterior, atualizado.getImagem())) {
             imagemCarroService.remover(imagemAnterior);
         }
         logService.registrar("ATUALIZAR", ENTIDADE, "Carro atualizado: ID " + atualizado.getId() + ", modelo " + atualizado.getModelo());
+        return atualizado;
+    }
+
+    @Transactional
+    public Carro alterarStatus(Long id, StatusCarro status) {
+        if (status == null) {
+            throw new CarroException("Informe uma situação válida para o veículo.");
+        }
+        Carro carro = carroRepository.findByIdForUpdate(id)
+                .orElseThrow(() -> new CarroException("Carro com ID " + id + " não encontrado."));
+        carro.setStatus(status);
+        Carro atualizado = carroRepository.save(carro);
+        logService.registrar("ATUALIZAR", ENTIDADE,
+                "Situação do carro ID " + id + " alterada para " + status);
         return atualizado;
     }
 

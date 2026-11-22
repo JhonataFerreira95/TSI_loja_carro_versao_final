@@ -1,6 +1,7 @@
 package br.org.edu.ifrn.LojaCarro.controllers;
 
 import br.org.edu.ifrn.LojaCarro.repository.CarroRepository;
+import br.org.edu.ifrn.LojaCarro.repository.AgendamentoRepository;
 import br.org.edu.ifrn.LojaCarro.repository.LogRepository;
 import br.org.edu.ifrn.LojaCarro.repository.UsuarioRepository;
 import br.org.edu.ifrn.LojaCarro.model.PapelUsuario;
@@ -29,6 +30,9 @@ class UsuarioControllerTest {
     private CarroRepository carroRepository;
 
     @Autowired
+    private AgendamentoRepository agendamentoRepository;
+
+    @Autowired
     private UsuarioRepository usuarioRepository;
 
     @Autowired
@@ -39,6 +43,7 @@ class UsuarioControllerTest {
 
     @BeforeEach
     void limparBanco() {
+        agendamentoRepository.deleteAll();
         carroRepository.deleteAll();
         usuarioRepository.deleteAll();
         logRepository.deleteAll();

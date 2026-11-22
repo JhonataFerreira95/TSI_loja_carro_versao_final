@@ -129,6 +129,14 @@ UPDATE usuario SET papel = 'ADMIN' WHERE email = 'admin@exemplo.com';
 
 Depois de promover a conta, faça login como esse usuário e recarregue a página.
 
+## Test drives
+
+Clientes autenticados podem reservar test drives de 30 minutos, diariamente entre
+09:00 e 18:00 (último início às 17:30). A disponibilidade é revalidada no backend
+no momento da confirmação; horários cancelados ficam disponíveis novamente.
+Administradores podem filtrar agendamentos por data e veículo e marcar veículos
+como disponíveis, vendidos ou inativos.
+
 ## Imagens dos carros
 
 No cadastro, selecione uma imagem JPEG, PNG, GIF ou WebP de até 5 MB do computador.

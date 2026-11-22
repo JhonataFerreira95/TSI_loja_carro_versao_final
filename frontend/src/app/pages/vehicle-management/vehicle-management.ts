@@ -82,6 +82,19 @@ export class VehicleManagement implements OnInit {
       this.erro = true; this.mensagem = resposta.error?.erro || 'Falha ao remover imagem.';
     }});
   }
+  alterarStatus(carro: Carro, status: Carro['status']) {
+    this.api.alterarStatusCarro(carro.id, status).subscribe({
+      next: () => {
+        this.erro = false;
+        this.mensagem = 'Situação do veículo atualizada.';
+        this.listar();
+      },
+      error: resposta => {
+        this.erro = true;
+        this.mensagem = resposta.error?.erro || 'Falha ao atualizar situação do veículo.';
+      }
+    });
+  }
   cancelar() {
     this.editando = null;
     this.imagem = null;

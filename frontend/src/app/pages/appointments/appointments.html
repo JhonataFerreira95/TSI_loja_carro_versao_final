@@ -1,18 +1,26 @@
 <h1>Meus agendamentos</h1>
 @if (loading) { <div class="loading"></div> }
 @if (erro) { <div class="message error">{{ erro }}</div> }
+@if (mensagem) { <div class="message success">{{ mensagem }}</div> }
 @if (!loading && !agendamentos.length) { <div class="card">Nenhum agendamento encontrado.</div> }
 <div class="table-wrap">
   @if (agendamentos.length) {
     <table>
-      <thead><tr><th>Veículo</th><th>Data/hora</th><th>Status</th><th>Observação</th></tr></thead>
+      <thead><tr><th>Veículo</th><th>Data/hora</th><th>Status</th><th>Observação</th><th>Ações</th></tr></thead>
       <tbody>
         @for (item of agendamentos; track item.id) {
           <tr>
-            <td>{{ item.carro?.modelo }}</td>
+            <td>{{ item.carro.modelo }}</td>
             <td>{{ item.dataHora | date:'dd/MM/yyyy HH:mm' }}</td>
             <td>{{ item.status }}</td>
             <td>{{ item.observacao || '-' }}</td>
+            <td>
+              @if (podeCancelar(item)) {
+                <button type="button" class="danger" [disabled]="cancelando === item.id" (click)="cancelar(item)">
+                  {{ cancelando === item.id ? 'Cancelando...' : 'Cancelar' }}
+                </button>
+              } @else { - }
+            </td>
           </tr>
         }
       </tbody>
