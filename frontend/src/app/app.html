@@ -17,6 +17,7 @@
       <span class="user-name">{{ api.usuario()?.nome }}</span>
       <button type="button" class="link-button" (click)="sair()">Sair</button>
     }
+    @if (erroLogout) { <span class="logout-error" role="alert">{{ erroLogout }}</span> }
   </nav>
 </header>
 <main class="app-content">

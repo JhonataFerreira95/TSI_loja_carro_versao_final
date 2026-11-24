@@ -4,3 +4,44 @@
   <article class="card"><p>Agendamentos</p><h2>{{ agendamentos }}</h2><a routerLink="/admin/agendamentos">Gerenciar agendamentos</a></article>
   <article class="card"><p>Usuários</p><h2>{{ usuarios }}</h2></article>
 </div>
+
+<section class="card users-card">
+  <h2>Gerenciar usuários</h2>
+  @if (mensagemUsuarios) {
+    <div class="message" [class.error]="erroUsuarios" [class.success]="!erroUsuarios" role="status">
+      {{ mensagemUsuarios }}
+    </div>
+  }
+  @if (carregandoUsuarios) {
+    <div class="loading" aria-label="Carregando usuários"></div>
+  } @else if (listaUsuarios.length === 0) {
+    <p>Nenhum usuário cadastrado.</p>
+  } @else {
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Nome</th><th>E-mail</th><th>Perfil</th><th>Ações</th></tr>
+        </thead>
+        <tbody>
+          @for (usuario of listaUsuarios; track usuario.id) {
+            <tr>
+              <td>{{ usuario.nome }}</td>
+              <td>{{ usuario.email }}</td>
+              <td>{{ usuario.papel === 'ADMIN' ? 'Administrador' : 'Usuário' }}</td>
+              <td>
+                <button
+                  type="button"
+                  class="danger"
+                  [disabled]="excluindoUsuarioId !== null || usuario.id === usuarioLogadoId"
+                  [title]="usuario.id === usuarioLogadoId ? 'Não é possível excluir sua própria conta.' : ''"
+                  (click)="excluirUsuario(usuario)">
+                  {{ excluindoUsuarioId === usuario.id ? 'Excluindo...' : 'Excluir' }}
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>
