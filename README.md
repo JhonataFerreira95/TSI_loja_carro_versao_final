@@ -338,6 +338,8 @@ npm install
 npm test -- --watch=false --browsers=ChromeHeadless
 ```
 
+O teste frontend requer Google Chrome ou Chromium. Caso o executável não esteja no caminho padrão do Windows, configure a variável `CHROME_BIN` antes do comando.
+
 ## Endereço da aplicação publicada
 
 Nenhum endereço de publicação está configurado neste repositório. A URL oficial deverá ser preenchida após o deploy em ambiente de hospedagem.
