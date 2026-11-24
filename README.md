@@ -6,34 +6,7 @@ O sistema possui perfis de usuário e administrador. Usuários comuns podem mant
 
 ## Como rodar o projeto
 
-### Opção recomendada: Docker Compose
-
-Pré-requisitos:
-
-- Docker Desktop
-- Docker Compose
-
-Na raiz do projeto, execute:
-
-```powershell
-docker compose up --build
-```
-
-A aplicação estará disponível em:
-
-```text
-http://localhost:8080
-```
-
-Para encerrar:
-
-```powershell
-docker compose down
-```
-
-Os dados do MySQL e das imagens enviadas são mantidos nos volumes `mysql_data` e `app_uploads`.
-
-### Desenvolvimento local
+### Sem Docker
 
 Pré-requisitos:
 
@@ -93,6 +66,33 @@ $env:SERVER = "dev"
 ```
 
 Acesse `http://localhost:8080`. Os arquivos Angular são gerados em `src/main/resources/static`.
+
+### Com Docker
+
+Pré-requisitos:
+
+- Docker Desktop
+- Docker Compose
+
+Na raiz do projeto, execute:
+
+```powershell
+docker compose up --build
+```
+
+A aplicação estará disponível em:
+
+```text
+http://localhost:8080
+```
+
+Para encerrar:
+
+```powershell
+docker compose down
+```
+
+Os dados do MySQL e das imagens enviadas são mantidos nos volumes `mysql_data` e `app_uploads`.
 
 ## Tecnologias utilizadas
 
