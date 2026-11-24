@@ -37,3 +37,10 @@
 2026-11-22T17:07:47.405-03:00  INFO 95024 --- [LojaCarro] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2026-11-22T17:07:47.406-03:00  INFO 95024 --- [LojaCarro] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
 2026-11-22T17:07:58.529-03:00  INFO 95024 --- [LojaCarro] [http-nio-8080-exec-8] b.o.e.i.LojaCarro.services.LogService    : [CONSULTAR] Carro - Listagem de todos os carros - por anônimo
+2026-11-22T17:09:17.176-03:00  INFO 95024 --- [LojaCarro] [http-nio-8080-exec-5] b.o.e.i.LojaCarro.services.LogService    : [LOGIN] Usuario - Login realizado: admin@lojacarro.local - por Administrador Loja Carro (admin@lojacarro.local)
+2026-11-22T17:09:17.201-03:00  INFO 95024 --- [LojaCarro] [http-nio-8080-exec-3] b.o.e.i.LojaCarro.services.LogService    : [CONSULTAR] Carro - Listagem de todos os carros - por Administrador Loja Carro (admin@lojacarro.local)
+2026-11-22T17:09:23.933-03:00  INFO 95024 --- [LojaCarro] [http-nio-8080-exec-7] b.o.e.i.LojaCarro.services.LogService    : [CONSULTAR] Carro - Listagem de todos os carros - por Administrador Loja Carro (admin@lojacarro.local)
+2026-11-22T17:09:25.178-03:00  INFO 95024 --- [LojaCarro] [http-nio-8080-exec-8] b.o.e.i.LojaCarro.services.LogService    : [CONSULTAR] Carro - Listagem de todos os carros - por Administrador Loja Carro (admin@lojacarro.local)
+2026-11-22T17:09:26.155-03:00  INFO 95024 --- [LojaCarro] [http-nio-8080-exec-9] b.o.e.i.LojaCarro.services.LogService    : [CONSULTAR] Carro - Listagem de todos os carros - por Administrador Loja Carro (admin@lojacarro.local)
+2026-11-22T17:09:26.160-03:00  INFO 95024 --- [LojaCarro] [http-nio-8080-exec-5] b.o.e.i.LojaCarro.services.LogService    : [CONSULTAR] Usuario - Listagem de todos os usuários - por Administrador Loja Carro (admin@lojacarro.local)
+2026-11-22T17:09:30.232-03:00  INFO 95024 --- [LojaCarro] [http-nio-8080-exec-3] b.o.e.i.LojaCarro.services.LogService    : [CONSULTAR] Carro - Listagem de todos os carros - por Administrador Loja Carro (admin@lojacarro.local)
